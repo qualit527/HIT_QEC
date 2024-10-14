@@ -53,16 +53,16 @@
     - `BP2`、`FDBP`：
 
       ```python
-      { "OSD": "True" | "False" }                 // 是否使用OSD后处理，默认为False
+      { "OSD": "True" | "False" }                // 是否使用OSD后处理，默认为False
       ```
 
     - `LLRBP`、`EWA-BP`：
 
       ```python
       {
-        "schedule": "flooding" | "layer",		     // 消息调度方式，默认为flooding
-        "init": "Momentum",					             // 等效于EWA-BP
-        "method": "Momentum" | "Ada" | "MBP",	   // 改变消息更新公式，不支持与init混用
+        "schedule": "flooding" | "layer",        // 消息调度方式，默认为flooding
+        "init": "Momentum",                      // 等效于EWA-BP
+        "method": "Momentum" | "Ada" | "MBP",    // 改变消息更新公式，不支持与init混用
         "alpha": 0.7                             // init或method的超参数
       }
       ```
@@ -70,13 +70,13 @@
     - `MBP`：
 
       ```python
-      { "alpha": 0.7  }					                 // 控制更新步长的超参数
+      { "alpha": 0.7  }                          // 控制更新步长的超参数
       ```
 
     - `AMBP`、`AEWA-BP`：
 
       ```python
-      { "alphas": [1, 0, 11]  }			            // 超参数的遍历范围
+      { "alphas": [1, 0, 11]  }                  // 超参数的遍历范围
       ```
 
     - `MWPM`：无。
