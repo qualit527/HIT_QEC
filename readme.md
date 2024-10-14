@@ -41,11 +41,11 @@
 
     - `BP2`、`BP-OSD`：二元域经典置信传播算法，参见 [quantumgizmos/bp_osd](https://github.com/quantumgizmos/bp_osd)；
     - `FDBP`、`FDBP-OSD`：二元域完全解耦置信传播算法 [arxiv:2305.17505](https://arxiv.org/abs/2305.17505)；**（高精度，依赖OSD，** $O(N^3)$ **）**
-    - `LLRBP`：四元对数域置信传播算法 [TQE 2021](https://ieeexplore.ieee.org/abstract/document/9542859/)；***（高精度，依赖OSD，** $O(N^3)$ **）**
+    - `LLRBP`：四元对数域置信传播算法 [TQE 2021](https://ieeexplore.ieee.org/abstract/document/9542859/)；**（高精度，依赖OSD，** $O(N^3)$ **）**
     - `MBP`：具有额外记忆效应的 LLRBP [Npj Quantum Inf. 2022](https://www.nature.com/articles/s41534-022-00623-2)；
-    - **`AMBP`：** 遍历超参数的 MBP；**（高精度，近似** $O(N) **）**
+    - **`AMBP`：** 遍历超参数的 MBP；**（高精度，近似** $O(N)$ **）**
     - `EWA-BP`：自适应先验概率的 LLRBP [arxiv:2407.11523](https://arxiv.org/abs/2407.11523)；
-    - **`AEWA-BP`：** 遍历超参数的 EWA-BP；**（高精度，近似** $O(N) **）**
+    - **`AEWA-BP`：** 遍历超参数的 EWA-BP；**（高精度，近似** $O(N)$ **）**
     - **`MWPM`：** 最小重完美匹配，参见 [oscarhiggott/PyMatching](https://github.com/oscarhiggott/PyMatching)。**（高精度，仅限拓扑码，** $O(N^3)$ **）**
 
   - `params`：**（可选）** 用于设置各译码器的具体参数：
