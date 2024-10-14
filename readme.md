@@ -63,7 +63,7 @@
         "schedule": "flooding" | "layer",        // 消息调度方式，默认为flooding
         "init": "Momentum",                      // 等效于EWA-BP
         "method": "Momentum" | "Ada" | "MBP",    // 改变消息更新公式，不支持与init混用
-        "alpha": 0.7                             // init或method的超参数
+        "alpha": 0.7,                            // init或method的超参数
         "OSD": "True" | "False"                  // 是否使用OSD后处理，默认为False
       }
       ```
