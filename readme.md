@@ -171,6 +171,8 @@
 
 ## 运行实验
 
+1. 安装依赖：python3、numpy、scipy、pandas、matplotlib、ldpc、tqdm
+
 1. 安装 FDBP 和 LLRBP：
 
    ```bash
