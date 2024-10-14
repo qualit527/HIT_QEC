@@ -43,40 +43,40 @@
     - `FDBP`、`FDBP-OSD`：二元域完全解耦置信传播算法 [arxiv:2305.17505](https://arxiv.org/abs/2305.17505)；**（高精度，依赖OSD，$O(N^3)$ ）**
     - `LLRBP`：四元对数域置信传播算法 [TQE 2021](https://ieeexplore.ieee.org/abstract/document/9542859/)；**（高精度，依赖OSD，$O(N^3)$ ）**
     - `MBP`：具有额外记忆效应的 LLRBP [Npj Quantum Inf. 2022](https://www.nature.com/articles/s41534-022-00623-2)；
-    - **`AMBP`：**遍历超参数的 MBP；**（高精度，近似 $O(N)$ ）**
+    - **`AMBP`：** 遍历超参数的 MBP；**（高精度，近似 $O(N)$ ）**
     - `EWA-BP`：自适应先验概率的 LLRBP [arxiv:2407.11523](https://arxiv.org/abs/2407.11523)；
-    - **`AEWA-BP`：**遍历超参数的 EWA-BP；**（高精度，近似 $O(N)$ ）**
-    - **`MWPM`：**最小重完美匹配，参见 [oscarhiggott/PyMatching](https://github.com/oscarhiggott/PyMatching)。（**高精度，仅限拓扑码，**$O(N^3)$）
+    - **`AEWA-BP`：** 遍历超参数的 EWA-BP；**（高精度，近似 $O(N)$ ）**
+    - **`MWPM`：** 最小重完美匹配，参见 [oscarhiggott/PyMatching](https://github.com/oscarhiggott/PyMatching)。（**高精度，仅限拓扑码，**$O(N^3)$）
 
-  - `params`：**（可选）**用于设置各译码器的具体参数：
+  - `params`：**（可选）** 用于设置各译码器的具体参数：
 
     - `BP2`、`FDBP`：
 
       ```json
-      { "OSD": True | False }						// 是否使用OSD后处理，默认为False
+      { "OSD": "True" | "False" }                 // 是否使用OSD后处理，默认为False
       ```
 
     - `LLRBP`、`EWA-BP`：
 
       ```json
       {
-      	"schedule": "flooding" | "layer",		// 消息调度方式，默认为flooding
-          "init": "Momentum",						// 等效于EWA-BP
-          "method"："Momentum" | "Ada" | "MBP",   // 改变消息更新公式，不支持与init混用
-          "alpha"：0.7					   		   // init或method的超参数
+        "schedule": "flooding" | "layer",		    // 消息调度方式，默认为flooding
+        "init": "Momentum",					    // 等效于EWA-BP
+        "method": "Momentum" | "Ada" | "MBP",	    // 改变消息更新公式，不支持与init混用
+        "alpha": 0.7                              // init或method的超参数
       }
       ```
 
     - `MBP`：
 
       ```json
-      {	"alpha"：0.7    }					   // 控制更新步长的超参数
+      { "alpha": 0.7  }					   // 控制更新步长的超参数
       ```
 
     - `AMBP`、`AEWA-BP`：
 
       ```json
-      {	"alphas": [1, 0, 11]	  }			   // 超参数的遍历范围
+      { "alphas": [1, 0, 11]  }			   // 超参数的遍历范围
       ```
 
     - `MWPM`：无。
