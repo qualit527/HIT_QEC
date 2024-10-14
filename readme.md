@@ -46,7 +46,7 @@
     - **`AMBP`：** 遍历超参数的 MBP；**（高精度，近似 $O(N)$ ）**
     - `EWA-BP`：自适应先验概率的 LLRBP [arxiv:2407.11523](https://arxiv.org/abs/2407.11523)；
     - **`AEWA-BP`：** 遍历超参数的 EWA-BP；**（高精度，近似 $O(N)$ ）**
-    - **`MWPM`：** 最小重完美匹配，参见 [oscarhiggott/PyMatching](https://github.com/oscarhiggott/PyMatching)。（**高精度，仅限拓扑码，**$O(N^3)$）
+    - **`MWPM`：** 最小重完美匹配，参见 [oscarhiggott/PyMatching](https://github.com/oscarhiggott/PyMatching)。**（高精度，仅限拓扑码，**$O(N^3)$）**
 
   - `params`：**（可选）** 用于设置各译码器的具体参数：
 
