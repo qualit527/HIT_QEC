@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools", "pybind11"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bpdecoupling"
+version = "2023.4.2"
+description = "Python tools for bp decoding with C++ backend."
+authors = [{ name = "HITsz", email = "none@example.com" }]
+maintainers = []
+keywords = ["bp decode", "quantum"]
+readme = { file = "README.md", content-type = "text/markdown" }
+# license = { file = "" }
+requires-python = ">=3"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+urls = { homepage = "to://be.done/", documentation = "to://be.done/", repository = "to://be.done/" }
+dependencies = []
+dynamic = []

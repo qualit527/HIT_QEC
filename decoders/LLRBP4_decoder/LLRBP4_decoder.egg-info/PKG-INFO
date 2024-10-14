@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: LLRBP4-decoder
+Version: 0.1.0
+Summary: Log-likelihood quaternary domain belief propagation decoder (and its variations) for quantum error correction codes
+Author: Jiahan Chen
+Author-email: jiahanchen527@gmail.com
+Requires-Dist: pybind11
+Requires-Dist: numpy
