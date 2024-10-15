@@ -175,7 +175,7 @@
 1. 安装依赖：
 
    ```bash
-   pip install numpy scipy pandas matplotlib ldpc tqdm
+   pip install numpy scipy pandas matplotlib ldpc tqdm galois
    ```
 
 2. 安装 FDBP 和 LLRBP：
