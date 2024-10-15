@@ -220,8 +220,8 @@ def run_decoder(name, decoder, syndrome, code_length, params, noise_model):
                     params_copy.pop("alphas", None)
                     correction, flag, iter = decoder.standard_decoder(syndrome, **params_copy)
                     if flag:
-                        # if alpha != alpha_range[0]:
-                        #     print(f"params: {params}")
+                        # if alpha < 0.1:
+                            # print(f"params: {params_copy}")
                         break
             
             else:
