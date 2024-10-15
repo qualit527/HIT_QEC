@@ -172,9 +172,13 @@
 
 ## 运行实验
 
-1. 安装依赖：python3、numpy、scipy、pandas、matplotlib、ldpc、tqdm
+1. 安装依赖：
 
-1. 安装 FDBP 和 LLRBP：
+   ```bash
+   pip install numpy scipy pandas matplotlib ldpc tqdm
+   ```
+
+2. 安装 FDBP 和 LLRBP：
 
    ```bash
    cd decoders/bp_decoupling_decoder_py
@@ -184,9 +188,9 @@
    python setup.py install
    ```
 
-2. 定制 `config.json` 中的设置。
+3. 定制 `config.json` 中的设置。
 
-3. 运行 `main.py` 启动实验：
+4. 运行 `main.py` 启动实验：
 
    ```bash
    python main.py --config=Toric
@@ -194,7 +198,7 @@
 
    --config默认为Surface，此外可选： (--config_path CONFIG_PATH) (--save_path SAVE_PATH)。
 
-4. 在 `./results/CODE_NAME` 下找到仿真结果图像和数据。
+5. 在 `./results/CODE_NAME` 下找到仿真结果图像和数据。
 
 ## 结果示例
 
