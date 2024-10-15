@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/CPP/eigen-master/test/geo_orthomethods.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"BuildOfficial"
+		],
+		"name" : "geo_orthomethods_4"
+	}
+}

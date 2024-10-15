@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/CPP/eigen-master/test/lscg.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"BuildOfficial"
+		],
+		"name" : "lscg_2"
+	}
+}

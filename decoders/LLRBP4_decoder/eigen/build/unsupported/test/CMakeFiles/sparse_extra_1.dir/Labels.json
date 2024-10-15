@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/CPP/eigen-master/unsupported/test/sparse_extra.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"BuildUnsupported"
+		],
+		"name" : "sparse_extra_1"
+	}
+}

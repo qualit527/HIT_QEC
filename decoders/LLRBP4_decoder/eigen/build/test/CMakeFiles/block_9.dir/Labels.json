@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/CPP/eigen-master/test/block.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"BuildOfficial"
+		],
+		"name" : "block_9"
+	}
+}

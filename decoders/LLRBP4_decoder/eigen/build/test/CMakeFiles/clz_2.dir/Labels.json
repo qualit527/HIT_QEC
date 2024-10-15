@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/CPP/eigen-master/test/clz.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"BuildOfficial"
+		],
+		"name" : "clz_2"
+	}
+}

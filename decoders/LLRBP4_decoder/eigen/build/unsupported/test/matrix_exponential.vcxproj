@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C312DE3F-7A00-3473-8B14-D1B1D753EFDD}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>matrix_exponential</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\CPP\eigen-master\unsupported\test\..\..\test;D:\CPP\eigen-master\unsupported\test\..\..\unsupported;D:\CPP\eigen-master\unsupported\test\..\..\Eigen;D:\CPP\eigen-master\build\unsupported\test\..\..\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\CPP\eigen-master\unsupported\test\..\..\test;D:\CPP\eigen-master\unsupported\test\..\..\unsupported;D:\CPP\eigen-master\unsupported\test\..\..\Eigen;D:\CPP\eigen-master\build\unsupported\test\..\..\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\CPP\eigen-master\unsupported\test\..\..\test;D:\CPP\eigen-master\unsupported\test\..\..\unsupported;D:\CPP\eigen-master\unsupported\test\..\..\Eigen;D:\CPP\eigen-master\build\unsupported\test\..\..\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\CPP\eigen-master\unsupported\test\..\..\test;D:\CPP\eigen-master\unsupported\test\..\..\unsupported;D:\CPP\eigen-master\unsupported\test\..\..\Eigen;D:\CPP\eigen-master\build\unsupported\test\..\..\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\CPP\eigen-master\unsupported\test\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/CPP/eigen-master/unsupported/test/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/unsupported/test/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;D:\CPP\eigen-master\cmake\FindAdolc.cmake;D:\CPP\eigen-master\cmake\FindFFTW.cmake;D:\CPP\eigen-master\cmake\FindGoogleHash.cmake;D:\CPP\eigen-master\cmake\FindMPFR.cmake;D:\CPP\eigen-master\cmake\FindMPREAL.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\CPP\eigen-master\build\unsupported\test\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/CPP/eigen-master/unsupported/test/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/unsupported/test/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;D:\CPP\eigen-master\cmake\FindAdolc.cmake;D:\CPP\eigen-master\cmake\FindFFTW.cmake;D:\CPP\eigen-master\cmake\FindGoogleHash.cmake;D:\CPP\eigen-master\cmake\FindMPFR.cmake;D:\CPP\eigen-master\cmake\FindMPREAL.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\CPP\eigen-master\build\unsupported\test\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/CPP/eigen-master/unsupported/test/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/unsupported/test/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;D:\CPP\eigen-master\cmake\FindAdolc.cmake;D:\CPP\eigen-master\cmake\FindFFTW.cmake;D:\CPP\eigen-master\cmake\FindGoogleHash.cmake;D:\CPP\eigen-master\cmake\FindMPFR.cmake;D:\CPP\eigen-master\cmake\FindMPREAL.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\CPP\eigen-master\build\unsupported\test\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/CPP/eigen-master/unsupported/test/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/unsupported/test/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;D:\CPP\eigen-master\cmake\FindAdolc.cmake;D:\CPP\eigen-master\cmake\FindFFTW.cmake;D:\CPP\eigen-master\cmake\FindGoogleHash.cmake;D:\CPP\eigen-master\cmake\FindMPFR.cmake;D:\CPP\eigen-master\cmake\FindMPREAL.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\CPP\eigen-master\build\unsupported\test\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\CPP\eigen-master\build\ZERO_CHECK.vcxproj">
+      <Project>{3B9BFD40-5F03-3746-A85E-82A89A188DDC}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\unsupported\test\matrix_exponential_1.vcxproj">
+      <Project>{B8805570-B383-3312-94A5-33398DE5D747}</Project>
+      <Name>matrix_exponential_1</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\unsupported\test\matrix_exponential_2.vcxproj">
+      <Project>{E76DDCA9-85CD-3963-B25A-165A4817ADA1}</Project>
+      <Name>matrix_exponential_2</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\unsupported\test\matrix_exponential_3.vcxproj">
+      <Project>{40C01654-035D-3E1D-AC4D-7000A08AD53A}</Project>
+      <Name>matrix_exponential_3</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\unsupported\test\matrix_exponential_4.vcxproj">
+      <Project>{F9EAE52D-51E8-37AF-9C06-100DE824EBAA}</Project>
+      <Name>matrix_exponential_4</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\unsupported\test\matrix_exponential_5.vcxproj">
+      <Project>{941DC3C5-673C-315C-9F0C-1CB05DD18946}</Project>
+      <Name>matrix_exponential_5</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\unsupported\test\matrix_exponential_6.vcxproj">
+      <Project>{E10A4C5A-681C-3361-A839-8160689400A6}</Project>
+      <Name>matrix_exponential_6</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\unsupported\test\matrix_exponential_7.vcxproj">
+      <Project>{67DB29A4-B922-3493-ACF3-1AAD80FEF9B0}</Project>
+      <Name>matrix_exponential_7</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\unsupported\test\matrix_exponential_8.vcxproj">
+      <Project>{2F6F2C69-C7EB-36E3-A40B-72E0D62C7875}</Project>
+      <Name>matrix_exponential_8</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\unsupported\test\matrix_exponential_9.vcxproj">
+      <Project>{23B6C7E9-0832-3F6D-A244-3BCAC5C764B1}</Project>
+      <Name>matrix_exponential_9</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

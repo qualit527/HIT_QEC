@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3484D1D0-25AB-3FD6-9EE1-505CBEE69380}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>all_examples</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\CPP\eigen-master\doc\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/CPP/eigen-master/doc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/doc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\CPP\eigen-master\doc\Doxyfile.in;D:\CPP\eigen-master\doc\eigendoxy_footer.html.in;D:\CPP\eigen-master\doc\eigendoxy_header.html.in;D:\CPP\eigen-master\doc\eigendoxy_layout.xml.in;D:\CPP\eigen-master\unsupported\doc\eigendoxy_layout.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\CPP\eigen-master\build\doc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/CPP/eigen-master/doc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/doc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\CPP\eigen-master\doc\Doxyfile.in;D:\CPP\eigen-master\doc\eigendoxy_footer.html.in;D:\CPP\eigen-master\doc\eigendoxy_header.html.in;D:\CPP\eigen-master\doc\eigendoxy_layout.xml.in;D:\CPP\eigen-master\unsupported\doc\eigendoxy_layout.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\CPP\eigen-master\build\doc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/CPP/eigen-master/doc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/doc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\CPP\eigen-master\doc\Doxyfile.in;D:\CPP\eigen-master\doc\eigendoxy_footer.html.in;D:\CPP\eigen-master\doc\eigendoxy_header.html.in;D:\CPP\eigen-master\doc\eigendoxy_layout.xml.in;D:\CPP\eigen-master\unsupported\doc\eigendoxy_layout.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\CPP\eigen-master\build\doc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/CPP/eigen-master/doc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/doc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\CPP\eigen-master\doc\Doxyfile.in;D:\CPP\eigen-master\doc\eigendoxy_footer.html.in;D:\CPP\eigen-master\doc\eigendoxy_header.html.in;D:\CPP\eigen-master\doc\eigendoxy_layout.xml.in;D:\CPP\eigen-master\unsupported\doc\eigendoxy_layout.xml.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\CPP\eigen-master\build\doc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\CPP\eigen-master\build\ZERO_CHECK.vcxproj">
+      <Project>{3B9BFD40-5F03-3746-A85E-82A89A188DDC}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\CustomizingEigen_Inheritance.vcxproj">
+      <Project>{1198292F-1265-3D2B-B4C9-FC8700188CEC}</Project>
+      <Name>CustomizingEigen_Inheritance</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Cwise_erf.vcxproj">
+      <Project>{ECC4835A-B544-3E25-BCCF-C05810A372B1}</Project>
+      <Name>Cwise_erf</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Cwise_erfc.vcxproj">
+      <Project>{0F38EFAD-CE29-3B9C-AFFB-1926AC3A21B4}</Project>
+      <Name>Cwise_erfc</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Cwise_lgamma.vcxproj">
+      <Project>{74150D08-B56C-3F4D-932D-01586F7313C2}</Project>
+      <Name>Cwise_lgamma</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\DenseBase_middleCols_int.vcxproj">
+      <Project>{18E75B3D-2CC9-3892-8FDE-4DA24D25AED3}</Project>
+      <Name>DenseBase_middleCols_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\DenseBase_middleRows_int.vcxproj">
+      <Project>{B81AE837-0191-3F45-B42A-CD53995B3969}</Project>
+      <Name>DenseBase_middleRows_int</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\DenseBase_template_int_middleCols.vcxproj">
+      <Project>{898A8DFA-EDDC-3417-9930-70582A52F87A}</Project>
+      <Name>DenseBase_template_int_middleCols</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\DenseBase_template_int_middleRows.vcxproj">
+      <Project>{6EA6742C-F8F3-353B-B078-ACC23A955146}</Project>
+      <Name>DenseBase_template_int_middleRows</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\QuickStart_example.vcxproj">
+      <Project>{608A21C6-C097-39EA-876E-6630105B086B}</Project>
+      <Name>QuickStart_example</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\QuickStart_example2_dynamic.vcxproj">
+      <Project>{F1D15554-EA68-33D9-9791-5E4F98739A8E}</Project>
+      <Name>QuickStart_example2_dynamic</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\QuickStart_example2_fixed.vcxproj">
+      <Project>{421D5A45-901F-389C-B45C-8A934EABB767}</Project>
+      <Name>QuickStart_example2_fixed</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TemplateKeyword_flexible.vcxproj">
+      <Project>{9C241238-EC3D-3BAA-8317-D0D10CB4DCCE}</Project>
+      <Name>TemplateKeyword_flexible</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TemplateKeyword_simple.vcxproj">
+      <Project>{C0C2D1BC-B63E-3A79-81DD-E3E76A73EAB3}</Project>
+      <Name>TemplateKeyword_simple</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TutorialInplaceLU.vcxproj">
+      <Project>{49B5FD49-D3BD-3E40-A7A8-5E576DE14768}</Project>
+      <Name>TutorialInplaceLU</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TutorialLinAlgComputeTwice.vcxproj">
+      <Project>{A030DE32-7A78-37B0-A7DE-00270AEFF344}</Project>
+      <Name>TutorialLinAlgComputeTwice</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TutorialLinAlgExComputeSolveError.vcxproj">
+      <Project>{22FF6120-0A3D-372C-B08F-DB968E90B43C}</Project>
+      <Name>TutorialLinAlgExComputeSolveError</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TutorialLinAlgExSolveColPivHouseholderQR.vcxproj">
+      <Project>{73FA46DB-C911-36AE-82FA-0B0791BC0E65}</Project>
+      <Name>TutorialLinAlgExSolveColPivHouseholderQR</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TutorialLinAlgExSolveLDLT.vcxproj">
+      <Project>{E03B9410-863F-3633-BEF8-5ABDCF40943B}</Project>
+      <Name>TutorialLinAlgExSolveLDLT</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TutorialLinAlgInverseDeterminant.vcxproj">
+      <Project>{3E2824D3-34AC-3780-A625-C0894BF6D40B}</Project>
+      <Name>TutorialLinAlgInverseDeterminant</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TutorialLinAlgRankRevealing.vcxproj">
+      <Project>{8FC1CE57-AC1F-30AA-8D78-94CC6720DBB5}</Project>
+      <Name>TutorialLinAlgRankRevealing</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TutorialLinAlgSVDSolve.vcxproj">
+      <Project>{B1EE6360-484D-375E-A26E-A22D954EF3CC}</Project>
+      <Name>TutorialLinAlgSVDSolve</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TutorialLinAlgSelfAdjointEigenSolver.vcxproj">
+      <Project>{2B91C953-94F9-3741-8901-064EC6908135}</Project>
+      <Name>TutorialLinAlgSelfAdjointEigenSolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\TutorialLinAlgSetThreshold.vcxproj">
+      <Project>{0C0C54DB-6DE2-3C81-A50E-D328739AD2A0}</Project>
+      <Name>TutorialLinAlgSetThreshold</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ArrayClass_accessors.vcxproj">
+      <Project>{3004FAD8-A79E-3EBC-B95C-2D8E95272DB7}</Project>
+      <Name>Tutorial_ArrayClass_accessors</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ArrayClass_addition.vcxproj">
+      <Project>{D5BB9594-165D-329B-8BE5-7A3CBFE64BCA}</Project>
+      <Name>Tutorial_ArrayClass_addition</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ArrayClass_cwise_other.vcxproj">
+      <Project>{E12200C1-E8E1-3E79-9024-5E1C20771715}</Project>
+      <Name>Tutorial_ArrayClass_cwise_other</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ArrayClass_interop.vcxproj">
+      <Project>{6BF740EE-DCD4-3E46-8622-F5582E58A35C}</Project>
+      <Name>Tutorial_ArrayClass_interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ArrayClass_interop_matrix.vcxproj">
+      <Project>{D0E3A3CA-9B40-3063-9DB8-36D12C861569}</Project>
+      <Name>Tutorial_ArrayClass_interop_matrix</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ArrayClass_mult.vcxproj">
+      <Project>{05217C8A-45F1-31D3-992C-AA99F004D2A1}</Project>
+      <Name>Tutorial_ArrayClass_mult</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_BlockOperations_block_assignment.vcxproj">
+      <Project>{8CA0A039-6091-39FD-8E66-8128F7DFC36C}</Project>
+      <Name>Tutorial_BlockOperations_block_assignment</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_BlockOperations_colrow.vcxproj">
+      <Project>{D43A40B7-3155-337E-93DE-5DE54EBEEEBE}</Project>
+      <Name>Tutorial_BlockOperations_colrow</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_BlockOperations_corner.vcxproj">
+      <Project>{2AEF3A6F-1737-3DEE-83FF-C7A0A314E7F0}</Project>
+      <Name>Tutorial_BlockOperations_corner</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_BlockOperations_print_block.vcxproj">
+      <Project>{8AFC39D7-DC50-3AC2-AA75-B1EFE18F69B4}</Project>
+      <Name>Tutorial_BlockOperations_print_block</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_BlockOperations_vector.vcxproj">
+      <Project>{2E51D948-7330-3D30-A773-CACA6982B263}</Project>
+      <Name>Tutorial_BlockOperations_vector</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_PartialLU_solve.vcxproj">
+      <Project>{082723B0-F36B-308B-82F3-24CA32D243B1}</Project>
+      <Name>Tutorial_PartialLU_solve</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_broadcast_1nn.vcxproj">
+      <Project>{90B06A89-0D9D-3925-AD2E-97DE2D41F25F}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_broadcast_1nn</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_broadcast_simple.vcxproj">
+      <Project>{4394F507-4602-3C43-A241-E34087D4BBE0}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_broadcast_simple</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_broadcast_simple_rowwise.vcxproj">
+      <Project>{9E5698FA-7623-3E66-9D45-21DFACC59E07}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_broadcast_simple_rowwise</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_colwise.vcxproj">
+      <Project>{3FBAC816-EB4E-3DF8-A5DE-5C4B5B6227D1}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_colwise</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_maxnorm.vcxproj">
+      <Project>{6EFDC0DA-6A70-3022-8B3A-F4892415BCBE}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_maxnorm</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_reductions_bool.vcxproj">
+      <Project>{CA28BB86-37BC-385C-9F8C-2C74264F1A12}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_reductions_bool</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_reductions_norm.vcxproj">
+      <Project>{8E262B29-46BD-3C98-AE61-42F6825FE788}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_reductions_norm</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_reductions_operatornorm.vcxproj">
+      <Project>{A0C8B927-1D26-3D1F-9668-F5AA9CF5DF48}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_reductions_operatornorm</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_rowwise.vcxproj">
+      <Project>{84693FAE-1C52-3D3F-AFFC-A1D892DF02A0}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_rowwise</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_ReductionsVisitorsBroadcasting_visitors.vcxproj">
+      <Project>{6ACFDB29-01C5-3BAE-9006-2C223ED0DBE6}</Project>
+      <Name>Tutorial_ReductionsVisitorsBroadcasting_visitors</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_simple_example_dynamic_size.vcxproj">
+      <Project>{525E5B31-A130-3195-8E2A-FA4F5621F1EA}</Project>
+      <Name>Tutorial_simple_example_dynamic_size</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\Tutorial_simple_example_fixed_size.vcxproj">
+      <Project>{A4474597-6EAB-3801-B48A-160E31ECF1D7}</Project>
+      <Name>Tutorial_simple_example_fixed_size</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\class_Block.vcxproj">
+      <Project>{79B50D4A-6B82-39C0-AA69-E65948A79B24}</Project>
+      <Name>class_Block</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\class_CwiseBinaryOp.vcxproj">
+      <Project>{A2D0C57C-D828-383A-BAD1-6A2D1E57F82D}</Project>
+      <Name>class_CwiseBinaryOp</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\class_CwiseUnaryOp.vcxproj">
+      <Project>{66AACE54-46DB-318E-8611-1B2421D55987}</Project>
+      <Name>class_CwiseUnaryOp</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\class_CwiseUnaryOp_ptrfun.vcxproj">
+      <Project>{22A015B4-55ED-39C4-95B1-A5F6B217E9C0}</Project>
+      <Name>class_CwiseUnaryOp_ptrfun</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\class_FixedBlock.vcxproj">
+      <Project>{E98F3D46-4D77-3EDB-B562-0448B020934E}</Project>
+      <Name>class_FixedBlock</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\class_FixedReshaped.vcxproj">
+      <Project>{2F410F12-2627-3297-B0E9-823CF4F0084B}</Project>
+      <Name>class_FixedReshaped</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\class_FixedVectorBlock.vcxproj">
+      <Project>{8DB80E8F-7593-3C79-A655-EECAA47F51B0}</Project>
+      <Name>class_FixedVectorBlock</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\class_Reshaped.vcxproj">
+      <Project>{5C46177E-D4A4-3B3C-9D5B-483479BE4AD4}</Project>
+      <Name>class_Reshaped</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\class_VectorBlock.vcxproj">
+      <Project>{FED046D0-C7E4-33E7-8A1B-CEDB926082A3}</Project>
+      <Name>class_VectorBlock</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\function_taking_eigenbase.vcxproj">
+      <Project>{E320A694-F80E-3DFA-BB53-464BC19BAD1E}</Project>
+      <Name>function_taking_eigenbase</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\function_taking_ref.vcxproj">
+      <Project>{B3D9EC97-40C5-3121-BC8D-8E61298841FD}</Project>
+      <Name>function_taking_ref</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\make_circulant.vcxproj">
+      <Project>{7C81B08C-D8F4-3177-B5B6-7009EF431A7E}</Project>
+      <Name>make_circulant</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\make_circulant2.vcxproj">
+      <Project>{77153174-C098-35B6-A043-8D60B005E32A}</Project>
+      <Name>make_circulant2</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\matrixfree_cg.vcxproj">
+      <Project>{B1D4B183-56E4-3A4E-A60F-EB5963AAB38D}</Project>
+      <Name>matrixfree_cg</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\nullary_indexing.vcxproj">
+      <Project>{4350C8D7-7A25-3050-8CAE-C0ADF02127AC}</Project>
+      <Name>nullary_indexing</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\special_examples\random_cpp11.vcxproj">
+      <Project>{7F126B91-C3C2-3A49-B614-06B5D2558150}</Project>
+      <Name>random_cpp11</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\tut_arithmetic_add_sub.vcxproj">
+      <Project>{6E05F88B-4BD5-3385-B604-43848584E88E}</Project>
+      <Name>tut_arithmetic_add_sub</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\tut_arithmetic_dot_cross.vcxproj">
+      <Project>{B6E32210-2B07-318E-89DA-9B6E1A860995}</Project>
+      <Name>tut_arithmetic_dot_cross</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\tut_arithmetic_matrix_mul.vcxproj">
+      <Project>{BF7436D8-9801-31AC-B338-C45D8BD15FD4}</Project>
+      <Name>tut_arithmetic_matrix_mul</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\tut_arithmetic_redux_basic.vcxproj">
+      <Project>{9A08A1DF-7890-3081-A1F1-1A8A060D0E49}</Project>
+      <Name>tut_arithmetic_redux_basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\tut_arithmetic_scalar_mul_div.vcxproj">
+      <Project>{888B3C64-194F-3B54-BE8C-425ED28097B8}</Project>
+      <Name>tut_arithmetic_scalar_mul_div</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\tut_matrix_coefficient_accessors.vcxproj">
+      <Project>{C1569A0A-A827-38F2-ACB1-98FB70711DD6}</Project>
+      <Name>tut_matrix_coefficient_accessors</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\tut_matrix_resize.vcxproj">
+      <Project>{D8AF64BB-44F1-3AE2-8E6B-E09D682A751C}</Project>
+      <Name>tut_matrix_resize</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\doc\examples\tut_matrix_resize_fixed_size.vcxproj">
+      <Project>{F1333F9B-C755-3D21-B69D-F77DBA9AEBAB}</Project>
+      <Name>tut_matrix_resize_fixed_size</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

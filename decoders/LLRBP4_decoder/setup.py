@@ -6,7 +6,7 @@ from pybind11.setup_helpers import Pybind11Extension, build_ext
 
 # 获取 Eigen 的包含路径
 # 假设 Eigen 安装在系统路径中，如果在自定义路径，请修改下面的路径
-eigen_include = 'D:\CPP\eigen-master'  # 修改为您的 Eigen 头文件路径
+eigen_include = 'eigen'  # 修改为您的 Eigen 头文件路径
 
 ext_modules = [
     Pybind11Extension(

@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6539E7DD-5DD0-3795-883B-6A2005753D8C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>qr</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Anaconda\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Anaconda\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Anaconda\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Anaconda\Library\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\CPP\eigen-master\test\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/CPP/eigen-master/test/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/test/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakePushCheckState.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCXXSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLanguage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindBLAS.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindLAPACK.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindQt4.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\MacroAddFileDependencies.cmake;D:\Anaconda\Library\lib\cmake\Boost-1.82.0\BoostConfig.cmake;D:\Anaconda\Library\lib\cmake\Boost-1.82.0\BoostConfigVersion.cmake;D:\Anaconda\Library\lib\cmake\boost_headers-1.82.0\boost_headers-config-version.cmake;D:\Anaconda\Library\lib\cmake\boost_headers-1.82.0\boost_headers-config.cmake;D:\CPP\eigen-master\cmake\EigenSmokeTestList.cmake;D:\CPP\eigen-master\cmake\FindAccelerate.cmake;D:\CPP\eigen-master\cmake\FindCHOLMOD.cmake;D:\CPP\eigen-master\cmake\FindHWLOC.cmake;D:\CPP\eigen-master\cmake\FindKLU.cmake;D:\CPP\eigen-master\cmake\FindPASTIX.cmake;D:\CPP\eigen-master\cmake\FindSPQR.cmake;D:\CPP\eigen-master\cmake\FindSuperLU.cmake;D:\CPP\eigen-master\cmake\FindUMFPACK.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\CPP\eigen-master\build\test\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/CPP/eigen-master/test/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/test/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakePushCheckState.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCXXSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLanguage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindBLAS.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindLAPACK.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindQt4.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\MacroAddFileDependencies.cmake;D:\Anaconda\Library\lib\cmake\Boost-1.82.0\BoostConfig.cmake;D:\Anaconda\Library\lib\cmake\Boost-1.82.0\BoostConfigVersion.cmake;D:\Anaconda\Library\lib\cmake\boost_headers-1.82.0\boost_headers-config-version.cmake;D:\Anaconda\Library\lib\cmake\boost_headers-1.82.0\boost_headers-config.cmake;D:\CPP\eigen-master\cmake\EigenSmokeTestList.cmake;D:\CPP\eigen-master\cmake\FindAccelerate.cmake;D:\CPP\eigen-master\cmake\FindCHOLMOD.cmake;D:\CPP\eigen-master\cmake\FindHWLOC.cmake;D:\CPP\eigen-master\cmake\FindKLU.cmake;D:\CPP\eigen-master\cmake\FindPASTIX.cmake;D:\CPP\eigen-master\cmake\FindSPQR.cmake;D:\CPP\eigen-master\cmake\FindSuperLU.cmake;D:\CPP\eigen-master\cmake\FindUMFPACK.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\CPP\eigen-master\build\test\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/CPP/eigen-master/test/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/test/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakePushCheckState.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCXXSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLanguage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindBLAS.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindLAPACK.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindQt4.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\MacroAddFileDependencies.cmake;D:\Anaconda\Library\lib\cmake\Boost-1.82.0\BoostConfig.cmake;D:\Anaconda\Library\lib\cmake\Boost-1.82.0\BoostConfigVersion.cmake;D:\Anaconda\Library\lib\cmake\boost_headers-1.82.0\boost_headers-config-version.cmake;D:\Anaconda\Library\lib\cmake\boost_headers-1.82.0\boost_headers-config.cmake;D:\CPP\eigen-master\cmake\EigenSmokeTestList.cmake;D:\CPP\eigen-master\cmake\FindAccelerate.cmake;D:\CPP\eigen-master\cmake\FindCHOLMOD.cmake;D:\CPP\eigen-master\cmake\FindHWLOC.cmake;D:\CPP\eigen-master\cmake\FindKLU.cmake;D:\CPP\eigen-master\cmake\FindPASTIX.cmake;D:\CPP\eigen-master\cmake\FindSPQR.cmake;D:\CPP\eigen-master\cmake\FindSuperLU.cmake;D:\CPP\eigen-master\cmake\FindUMFPACK.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\CPP\eigen-master\build\test\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/CPP/eigen-master/test/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CPP/eigen-master -BD:/CPP/eigen-master/build --check-stamp-file D:/CPP/eigen-master/build/test/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakePushCheckState.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCXXSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLanguage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckStructHasMember.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindBLAS.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindLAPACK.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindQt4.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\MacroAddFileDependencies.cmake;D:\Anaconda\Library\lib\cmake\Boost-1.82.0\BoostConfig.cmake;D:\Anaconda\Library\lib\cmake\Boost-1.82.0\BoostConfigVersion.cmake;D:\Anaconda\Library\lib\cmake\boost_headers-1.82.0\boost_headers-config-version.cmake;D:\Anaconda\Library\lib\cmake\boost_headers-1.82.0\boost_headers-config.cmake;D:\CPP\eigen-master\cmake\EigenSmokeTestList.cmake;D:\CPP\eigen-master\cmake\FindAccelerate.cmake;D:\CPP\eigen-master\cmake\FindCHOLMOD.cmake;D:\CPP\eigen-master\cmake\FindHWLOC.cmake;D:\CPP\eigen-master\cmake\FindKLU.cmake;D:\CPP\eigen-master\cmake\FindPASTIX.cmake;D:\CPP\eigen-master\cmake\FindSPQR.cmake;D:\CPP\eigen-master\cmake\FindSuperLU.cmake;D:\CPP\eigen-master\cmake\FindUMFPACK.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\CPP\eigen-master\build\test\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\CPP\eigen-master\build\ZERO_CHECK.vcxproj">
+      <Project>{3B9BFD40-5F03-3746-A85E-82A89A188DDC}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_1.vcxproj">
+      <Project>{E33B896A-4DAC-3D9A-8B5F-EE651164B398}</Project>
+      <Name>qr_1</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_10.vcxproj">
+      <Project>{360242F5-EB9C-3C79-8308-4925D6125F0B}</Project>
+      <Name>qr_10</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_11.vcxproj">
+      <Project>{E6138054-DE98-35C4-9F24-586814451C1B}</Project>
+      <Name>qr_11</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_12.vcxproj">
+      <Project>{914BBAB5-84BA-3D5F-8F59-BEBAAED6A018}</Project>
+      <Name>qr_12</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_2.vcxproj">
+      <Project>{DD737D31-9E77-3D79-9720-F468C56C06BB}</Project>
+      <Name>qr_2</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_3.vcxproj">
+      <Project>{F6845300-36E2-312D-A7F8-2C16137AC07E}</Project>
+      <Name>qr_3</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_4.vcxproj">
+      <Project>{8ED8C756-F6B5-3BD8-A6C4-7A14068C338F}</Project>
+      <Name>qr_4</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_5.vcxproj">
+      <Project>{A670AD07-2B38-3108-B791-84491310C920}</Project>
+      <Name>qr_5</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_6.vcxproj">
+      <Project>{E3B58170-1F9D-3CD7-A5C3-50B44BAA545A}</Project>
+      <Name>qr_6</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_7.vcxproj">
+      <Project>{0AE919A2-D2E7-3B41-9F84-9F2D4D893549}</Project>
+      <Name>qr_7</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_8.vcxproj">
+      <Project>{C767D20B-8818-3F5B-A248-BA0340A343F3}</Project>
+      <Name>qr_8</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\CPP\eigen-master\build\test\qr_9.vcxproj">
+      <Project>{2531A9CD-0710-3135-B1FE-947E657B61CD}</Project>
+      <Name>qr_9</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
