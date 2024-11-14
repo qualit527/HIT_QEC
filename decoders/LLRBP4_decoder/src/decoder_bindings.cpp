@@ -63,5 +63,6 @@ PYBIND11_MODULE(LLRBP4_decoder, m) {
              py::arg("method") = MethodType::NONE,
              py::arg("OSD") = OSDType::NONE,
              py::arg("alpha") = 1.0,
-             py::arg("beta") = 0.0);
+             py::arg("beta") = 0.0,
+             py::arg("test") = 0);
 }

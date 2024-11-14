@@ -140,7 +140,8 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                                                                         MethodType method,
                                                                         OSDType OSD,
                                                                         double alpha,
-                                                                        double beta){
+                                                                        double beta,
+                                                                        int test){
     // 复制成员变量
     Eigen::MatrixXd d_message_local = (s > 0) ? d_message_ds : d_message; // 根据是否存在 Hs 选择使用哪个消息矩阵
     Eigen::MatrixXd delta_message_local = (s > 0) ? delta_message_ds : delta_message;
@@ -240,32 +241,48 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
 
                 // 处理 init 方法
                 if(init == InitType::MOMENTUM){
-                    if(j < n){
-                        gt(j, 0) = last_qX(j) - qX(j);
-                        gt(j, 1) = last_qY(j) - qY(j);
-                        gt(j, 2) = last_qZ(j) - qZ(j);
-
-                        qX(j) = last_qX(j) - alpha * gt(j, 0);
-                        qY(j) = last_qY(j) - alpha * gt(j, 1);
-                        qZ(j) = last_qZ(j) - alpha * gt(j, 2);
+                    if(test == 1){
+                        if(iter > 0){
+                            qX(j) = alpha * qX(j) + (1.0 - alpha) * last_qX(j);
+                            qY(j) = alpha * qY(j) + (1.0 - alpha) * last_qY(j);
+                            qZ(j) = alpha * qZ(j) + (1.0 - alpha) * last_qZ(j);
+                        }
                     }
+
                     else{
-                        // 更新动量项 for qS
-                        gt_S(j - n) = last_qS(j - n) - qS(j - n);
-                        qS(j - n) = last_qS(j - n) - alpha * gt_S(j - n);
-                    }
+                        if(j < n){
+                            qX(j) = alpha * qX(j) + (1.0 - alpha) * last_qX(j);
+                            qY(j) = alpha * qY(j) + (1.0 - alpha) * last_qY(j);
+                            qZ(j) = alpha * qZ(j) + (1.0 - alpha) * last_qZ(j);
 
-                    // 更新 last_qX, last_qY, last_qZ
-                    for(int k = 0; k < n; ++k){
-                        last_qX(k) = qX(k);
-                        last_qY(k) = qY(k);
-                        last_qZ(k) = qZ(k);
-                    }
+                            if(j == 0){
+                                last_qX(n-1) = qX(n-1);
+                                last_qY(n-1) = qY(n-1);
+                                last_qZ(n-1) = qZ(n-1);
+                            }
+                            else{
+                                last_qX(j-1) = qX(j-1);
+                                last_qY(j-1) = qY(j-1);
+                                last_qZ(j-1) = qZ(j-1);
+                            }
+                        }
+                        else{
+                            // 更新动量项 for qS
+                            gt_S(j - n) = last_qS(j - n) - qS(j - n);
+                            qS(j - n) = last_qS(j - n) - alpha * gt_S(j - n);
 
-                    // 更新 last_qS
-                    for(int k = 0; k < s; ++k){
-                        last_qS(k) = qS(k);
+                            if(j == n){
+                                last_qS(s-1) = qS(s-1);
+                            }
+                            else{
+                                last_qS(j-1) = qS(j-1);
+                            }
+                        }
                     }
+                    // // 更新 last_qS
+                    // for(int k = 0; k < s; ++k){
+                    //     last_qS(k) = qS(k);
+                    // }
                 }
 
                 else if(init != InitType::NONE){
@@ -317,6 +334,17 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                         qX(j) = last_qX_q(j) - alpha * gt_q(j, 0);
                         qY(j) = last_qY_q(j) - alpha * gt_q(j, 1);
                         qZ(j) = last_qZ_q(j) - alpha * gt_q(j, 2);
+
+                        if(j == 0){
+                            last_qX_q(n-1) = qX(n-1);
+                            last_qY_q(n-1) = qY(n-1);
+                            last_qZ_q(n-1) = qZ(n-1);
+                        }
+                        else{
+                            last_qX_q(j-1) = qX(j-1);
+                            last_qY_q(j-1) = qY(j-1);
+                            last_qZ_q(j-1) = qZ(j-1);
+                        }
                     }
                     else{
                         // 更新动量项 for qS
@@ -324,16 +352,9 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                         qS(j - n) = last_qS_q(j - n) - alpha * gt_S_q(j - n);
                     }
 
-                    // 更新 last_qX, last_qY, last_qZ
-                    for(int k = 0; k < n; ++k){
-                        last_qX(k) = qX(k);
-                        last_qY(k) = qY(k);
-                        last_qZ(k) = qZ(k);
-                    }
-
                     // 更新 last_qS
                     for(int k = 0; k < s; ++k){
-                        last_qS(k) = qS(k);
+                        last_qS_q(k) = qS(k);
                     }
                 }
 
@@ -353,6 +374,17 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                             qY(j) = last_qY_q(j) - (alpha * gt_q(j, 1)) / (std::sqrt(Vt(j, 1)) + 1e-10);
                             qZ(j) = last_qZ_q(j) - (alpha * gt_q(j, 2)) / (std::sqrt(Vt(j, 2)) + 1e-10);
                         }
+
+                        if(j == 0){
+                            last_qX_q(n-1) = qX(n-1);
+                            last_qY_q(n-1) = qY(n-1);
+                            last_qZ_q(n-1) = qZ(n-1);
+                        }
+                        else{
+                            last_qX_q(j-1) = qX(j-1);
+                            last_qY_q(j-1) = qY(j-1);
+                            last_qZ_q(j-1) = qZ(j-1);
+                        }
                     }
                     else{
                         // AdaGrad 更新 for qS
@@ -364,16 +396,9 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                         }
                     }
 
-                    // 更新 last_qX, last_qY, last_qZ
-                    for(int k = 0; k < n; ++k){
-                        last_qX(k) = qX(k);
-                        last_qY(k) = qY(k);
-                        last_qZ(k) = qZ(k);
-                    }
-
                     // 更新 last_qS
                     for(int k = 0; k < s; ++k){
-                        last_qS(k) = qS(k);
+                        last_qS_q(k) = qS(k);
                     }
                 }
 
@@ -533,27 +558,52 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                 // 处理 init 方法
                 if(init == InitType::MOMENTUM){
                     // 更新动量项
-                    if(j < n){
-                        // 更新动量项
-                        gt(j, 0) = beta * gt(j, 0) + (1.0 - beta) * (last_qX(j) - qX(j));
-                        gt(j, 1) = beta * gt(j, 1) + (1.0 - beta) * (last_qY(j) - qY(j));
-                        gt(j, 2) = beta * gt(j, 2) + (1.0 - beta) * (last_qZ(j) - qZ(j));
+                    if(test == 1){
+                        if(iter > 0){
+                            qX(j) = alpha * qX(j) + (1.0 - alpha) * last_qX(j);
+                            qY(j) = alpha * qY(j) + (1.0 - alpha) * last_qY(j);
+                            qZ(j) = alpha * qZ(j) + (1.0 - alpha) * last_qZ(j);
 
-                        qX(j) = last_qX(j) - alpha * gt(j, 0);
-                        qY(j) = last_qY(j) - alpha * gt(j, 1);
-                        qZ(j) = last_qZ(j) - alpha * gt(j, 2);
+                            if(j == 0){
+                                last_qX(n-1) = qX(n-1);
+                                last_qY(n-1) = qY(n-1);
+                                last_qZ(n-1) = qZ(n-1);
+                            }
+                            else{
+                                last_qX(j-1) = qX(j-1);
+                                last_qY(j-1) = qY(j-1);
+                                last_qZ(j-1) = qZ(j-1);
+                            }
+                        }
                     }
+
                     else{
-                        // 更新动量项 for qS
-                        gt_S(j - n) = beta * gt_S(j - n) + (1.0 - beta) * (last_qS(j - n) - qS(j - n));
-                        qS(j - n) = last_qS(j - n) - alpha * gt_S(j - n);
-                    }
-                    
-                    // 更新 last_qX, last_qY, last_qZ
-                    for(int k = 0; k < n; ++k){
-                        last_qX(k) = qX(k);
-                        last_qY(k) = qY(k);
-                        last_qZ(k) = qZ(k);
+                        if(j < n){
+                            // 更新动量项
+                            gt(j, 0) = beta * gt(j, 0) + (1.0 - beta) * (last_qX(j) - qX(j));
+                            gt(j, 1) = beta * gt(j, 1) + (1.0 - beta) * (last_qY(j) - qY(j));
+                            gt(j, 2) = beta * gt(j, 2) + (1.0 - beta) * (last_qZ(j) - qZ(j));
+
+                            qX(j) = last_qX(j) - alpha * gt(j, 0);
+                            qY(j) = last_qY(j) - alpha * gt(j, 1);
+                            qZ(j) = last_qZ(j) - alpha * gt(j, 2);
+
+                            if(j == 0){
+                                last_qX(n-1) = qX(n-1);
+                                last_qY(n-1) = qY(n-1);
+                                last_qZ(n-1) = qZ(n-1);
+                            }
+                            else{
+                                last_qX(j-1) = qX(j-1);
+                                last_qY(j-1) = qY(j-1);
+                                last_qZ(j-1) = qZ(j-1);
+                            }
+                        }
+                        else{
+                            // 更新动量项 for qS
+                            gt_S(j - n) = beta * gt_S(j - n) + (1.0 - beta) * (last_qS(j - n) - qS(j - n));
+                            qS(j - n) = last_qS(j - n) - alpha * gt_S(j - n);
+                        }
                     }
 
                     // 更新 last_qS
@@ -609,22 +659,27 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                         qX(j) = last_qX_q(j) - alpha * gt_q(j, 0);
                         qY(j) = last_qY_q(j) - alpha * gt_q(j, 1);
                         qZ(j) = last_qZ_q(j) - alpha * gt_q(j, 2);
+
+                        if(j == 0){
+                            last_qX_q(n-1) = qX(n-1);
+                            last_qY_q(n-1) = qY(n-1);
+                            last_qZ_q(n-1) = qZ(n-1);
+                        }
+                        else{
+                            last_qX_q(j-1) = qX(j-1);
+                            last_qY_q(j-1) = qY(j-1);
+                            last_qZ_q(j-1) = qZ(j-1);
+                        }
                     }
                     else{
                         // 更新动量项 for qS
                         gt_S_q(j - n) = beta * gt_S_q(j - n) + (1.0 - beta) * (last_qS_q(j - n) - qS(j - n));
                         qS(j - n) = last_qS_q(j - n) - alpha * gt_S_q(j - n);
                     }
-                    // 更新 last_qX, last_qY, last_qZ
-                    for(int k = 0; k < n; ++k){
-                        last_qX(k) = qX(k);
-                        last_qY(k) = qY(k);
-                        last_qZ(k) = qZ(k);
-                    }
 
                     // 更新 last_qS
                     for(int k = 0; k < s; ++k){
-                        last_qS(k) = qS(k);
+                        last_qS_q(k) = qS(k);
                     }
                 }
 
@@ -644,6 +699,17 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                             qY(j) = last_qY_q(j) - (alpha * gt_q(j, 1)) / (std::sqrt(Vt(j, 1)) + 1e-10);
                             qZ(j) = last_qZ_q(j) - (alpha * gt_q(j, 2)) / (std::sqrt(Vt(j, 2)) + 1e-10);
                         }
+
+                        if(j == 0){
+                            last_qX_q(n-1) = qX(n-1);
+                            last_qY_q(n-1) = qY(n-1);
+                            last_qZ_q(n-1) = qZ(n-1);
+                        }
+                        else{
+                            last_qX_q(j-1) = qX(j-1);
+                            last_qY_q(j-1) = qY(j-1);
+                            last_qZ_q(j-1) = qZ(j-1);
+                        }
                     }
                     else{
                         // AdaGrad 更新 for qS
@@ -654,16 +720,10 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                             qS(j - n) = last_qS_q(j - n) - (alpha * gt_S_q(j - n)) / (std::sqrt(Vt_S_q(j - n)) + 1e-10);
                         }
                     }
-                    // 更新 last_qX, last_qY, last_qZ
-                    for(int k = 0; k < n; ++k){
-                        last_qX(k) = qX(k);
-                        last_qY(k) = qY(k);
-                        last_qZ(k) = qZ(k);
-                    }
 
                     // 更新 last_qS
                     for(int k = 0; k < s; ++k){
-                        last_qS(k) = qS(k);
+                        last_qS_q(k) = qS(k);
                     }
                 }
 

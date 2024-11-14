@@ -142,16 +142,14 @@ class LLRBp4Decoder:
         qY_0 = np.full(self.n, np.log(self.pi / self.py))
         qZ_0 = np.full(self.n, np.log(self.pi / self.pz))
 
-        # qX_summands = np.zeros(self.n)
-        # qY_summands = np.zeros(self.n)
-        # qZ_summands = np.zeros(self.n)
-
         last_qX = np.zeros(self.n)
         last_qY = np.zeros(self.n)
         last_qZ = np.zeros(self.n)
-        # last_qX = np.copy(qX_0)
-        # last_qY = np.copy(qY_0)
-        # last_qZ = np.copy(qZ_0)
+
+        # if test == 1:
+        #     last_qX = np.copy(qX_0)
+        #     last_qY = np.copy(qY_0)
+        #     last_qZ = np.copy(qZ_0)
 
         gt = np.zeros((self.n, 3))
         Vt = np.zeros((self.n, 3))
@@ -196,13 +194,22 @@ class LLRBp4Decoder:
                     qZ[j] = qZ_0[j]
 
                     if init == "Momentum":
-                        gt[j, 0] = last_qX[j] - qX[j]
-                        gt[j, 1] = last_qY[j] - qY[j]
-                        gt[j, 2] = last_qZ[j] - qZ[j]
+                        if i > 0:
+                        # gt[j, 0] = last_qX[j] - qX[j]
+                        # gt[j, 1] = last_qY[j] - qY[j]
+                        # gt[j, 2] = last_qZ[j] - qZ[j]
 
-                        qX[j] = last_qX[j] - alpha * gt[j, 0]
-                        qY[j] = last_qY[j] - alpha * gt[j, 1]
-                        qZ[j] = last_qZ[j] - alpha * gt[j, 2]
+                        # qX[j] = last_qX[j] - alpha * gt[j, 0]
+                        # qY[j] = last_qY[j] - alpha * gt[j, 1]
+                        # qZ[j] = last_qZ[j] - alpha * gt[j, 2]
+
+                            qX[j] = alpha * qX[j] + (1 - alpha) * last_qX[j]
+                            qY[j] = alpha * qY[j] + (1 - alpha) * last_qY[j]
+                            qZ[j] = alpha * qZ[j] + (1 - alpha) * last_qZ[j]
+
+                        
+                        # if j == 0:
+                            # print(f"iter: {i+1}, qX0: {qX[j]}, qY0: {qY[j]}, qZ0: {qZ[j]}, last_qX0: {last_qX[j]}, last_qY0: {last_qY[j]}, last_qZ0: {last_qZ[j]}")
 
                         last_qX, last_qY, last_qZ = qX.copy(), qY.copy(), qZ.copy()
 
@@ -240,13 +247,13 @@ class LLRBp4Decoder:
 
                     # 软判决向量
                     # 使用向量化操作计算 qX, qY 和 qZ 的总和
-                    qX_summands = ((self.Hz[index1, j] == 1)) * delta_message[index1, j]
-                    qY_summands = ((self.Hx[index1, j] != self.Hz[index1, j])) * delta_message[index1, j]
-                    qZ_summands = ((self.Hx[index1, j] == 1)) * delta_message[index1, j]
+                    qX_summands = np.sum(((self.Hz[index1, j] == 1)) * delta_message[index1, j])
+                    qY_summands = np.sum(((self.Hx[index1, j] != self.Hz[index1, j])) * delta_message[index1, j])
+                    qZ_summands = np.sum(((self.Hx[index1, j] == 1)) * delta_message[index1, j])
 
-                    qX[j] += np.sum(qX_summands)
-                    qY[j] += np.sum(qY_summands)
-                    qZ[j] += np.sum(qZ_summands)
+                    qX[j] += qX_summands
+                    qY[j] += qY_summands
+                    qZ[j] += qZ_summands
 
                     if method == "Momentum":
                         # 更新动量项
@@ -254,9 +261,9 @@ class LLRBp4Decoder:
                         gt_q[j, 1] = beta * gt_q[j, 1] + (1-beta) * (last_qY_q[j] - qY[j])
                         gt_q[j, 2] = beta * gt_q[j, 2] + (1-beta) * (last_qZ_q[j] - qZ[j])
 
-                        qX[j] = last_qX_q[j] - 0.8 * gt_q[j, 0]
-                        qY[j] = last_qY_q[j] - 0.8 * gt_q[j, 1]
-                        qZ[j] = last_qZ_q[j] - 0.8 * gt_q[j, 2]
+                        qX[j] = last_qX_q[j] - alpha * gt_q[j, 0]
+                        qY[j] = last_qY_q[j] - alpha * gt_q[j, 1]
+                        qZ[j] = last_qZ_q[j] - alpha * gt_q[j, 2]
 
                         last_qX_q, last_qY_q, last_qZ_q = qX.copy(), qY.copy(), qZ.copy()
 
@@ -269,9 +276,9 @@ class LLRBp4Decoder:
                         Vt[j] += np.square(gt_q[j])
                         
                         if i != 0:
-                            qX[j] = last_qX_q[j] - (5 * gt_q[j, 0]) / (np.sqrt(Vt[j, 0]) + 1e-10)
-                            qY[j] = last_qY_q[j] - (5 * gt_q[j, 1]) / (np.sqrt(Vt[j, 1]) + 1e-10)
-                            qZ[j] = last_qZ_q[j] - (5 * gt_q[j, 2]) / (np.sqrt(Vt[j, 2]) + 1e-10)
+                            qX[j] = last_qX_q[j] - (alpha * gt_q[j, 0]) / (np.sqrt(Vt[j, 0]) + 1e-10)
+                            qY[j] = last_qY_q[j] - (alpha * gt_q[j, 1]) / (np.sqrt(Vt[j, 1]) + 1e-10)
+                            qZ[j] = last_qZ_q[j] - (alpha * gt_q[j, 2]) / (np.sqrt(Vt[j, 2]) + 1e-10)
 
                         last_qX_q, last_qY_q, last_qZ_q = qX.copy(), qY.copy(), qZ.copy()
 
@@ -293,6 +300,8 @@ class LLRBp4Decoder:
                     d_message[index1[mask_Y], j] = self.lambda_func("Y", qX[j] - delta_message[index1[mask_Y], j], qY[j], qZ[j] - delta_message[index1[mask_Y], j])
                     d_message[index1[mask_Z], j] = self.lambda_func("Z", qX[j] - delta_message[index1[mask_Z], j], qY[j] - delta_message[index1[mask_Z], j], qZ[j])
                     
+                    # if j == 0:
+                        # print(f"iter: {i+1}, qX: {qX[j]}, qY: {qY[j]}, qZ: {qZ[j]}")
 
                     # hard decision 计算每一个比特上的出错概率
                     list = [qX[j], qY[j], qZ[j]]
@@ -396,9 +405,9 @@ class LLRBp4Decoder:
                         gt_q[j, 1] = beta * gt_q[j, 1] + (1-beta) * (last_qY_q[j] - qY[j])
                         gt_q[j, 2] = beta * gt_q[j, 2] + (1-beta) * (last_qZ_q[j] - qZ[j])
 
-                        qX[j] = last_qX_q[j] - 0.75 * gt_q[j, 0]
-                        qY[j] = last_qY_q[j] - 0.75 * gt_q[j, 1]
-                        qZ[j] = last_qZ_q[j] - 0.75 * gt_q[j, 2]
+                        qX[j] = last_qX_q[j] - alpha * gt_q[j, 0]
+                        qY[j] = last_qY_q[j] - alpha * gt_q[j, 1]
+                        qZ[j] = last_qZ_q[j] - alpha * gt_q[j, 2]
 
                         last_qX_q, last_qY_q, last_qZ_q = qX.copy(), qY.copy(), qZ.copy()
 
@@ -1207,17 +1216,17 @@ if __name__ == '__main__':
     py = 0.01
 
     max_iter = 50
-    decoder = LLRBp4Decoder(Hx, Hz, px, py, pz, max_iter, 1)
+    decoder = LLRBp4Decoder(Hx, Hz, px, py, pz, max_iter, dimension=1)
     error = np.array([1, 1, 0, 0, 0, 0, 0, 0])
     syndrome = (Hz @ error[0:4].T + Hx @ error[4:8].T) % 2
     print(syndrome)
-    correction, flag, iter, _, _, llr = decoder.standard_decoder(syndrome, schedule="flooding", init="Ada", alpha=5)
-    print(correction)
+    correction, flag, iter, llr = decoder.standard_decoder(syndrome, schedule="layer", method="Ada", alpha=5)
+    # print(correction)
     print(flag, iter)
     # print(reliability)
-    print((Hz @ correction[0:4].T + Hx @ correction[4:8].T) % 2)
+    # print((Hz @ correction[0:4].T + Hx @ correction[4:8].T) % 2)
 
-    # print(llr)
+    print(llr)
 
     bit_llr = {i: {"qX": [], "qY": [], "qZ": []} for i in range(Hz.shape[1])}
 

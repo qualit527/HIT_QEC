@@ -42,7 +42,8 @@ public:
                                                              MethodType method = MethodType::NONE,
                                                              OSDType OSD = OSDType::NONE,
                                                              double alpha = 1.0,
-                                                             double beta = 0.0);
+                                                             double beta = 0.0,
+                                                             int test = 0);
 
 
 private:

@@ -2,30 +2,29 @@
     "Surface": {
         "code": {
             "name": "Surface",
-            "L_range": [3, 5, 7]
+            "L_range": [7]
         },
             
         "decoders": [
             {
-                "name": "MWPM"
-            },
-            {
-                "name": "FDBP-OSD",
+                "name": "MBP",
                 "params": {
-                    "OSD": "True"
+                    "alpha": 0.65,
+                    "schedule": "layer"
                 }
             },
             {
-                "name": "AEWA-BP",
+                "name": "AMBP",
                 "params": {
+                    "schedule": "layer"
                 }
             }
         ],
         "max_iter": 100,
     
         "noise_model": "capacity", 
-        "n_test": 1000,
-        "p_range": ["linear", [0.01, 0.19, 7]]
+        "n_test": 10000,
+        "p_range": ["log", [0.001, 0.01, 10], [0.01, 0.1, 10], [0.1, 0.2, 5]]
     },
 
 
