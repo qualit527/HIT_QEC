@@ -7,16 +7,51 @@
             
         "decoders": [
             {
-                "name": "MBP",
+                "name": "LLRBP",
                 "params": {
-                    "alpha": 0.65,
-                    "schedule": "layer"
+                    "method": "Momentum",
+                    "alpha": 1,
+                    "beta": 0
                 }
             },
             {
-                "name": "AMBP",
+                "name": "LLRBP",
                 "params": {
-                    "schedule": "layer"
+                    "method": "Momentum",
+                    "alpha": 1,
+                    "beta": 0.1
+                }
+            },
+            {
+                "name": "LLRBP",
+                "params": {
+                    "method": "Momentum",
+                    "alpha": 1,
+                    "beta": 0.2
+                }
+            },
+            {
+                "name": "LLRBP",
+                "params": {
+                    "method": "Momentum",
+                    "alpha": 1,
+                    "beta": 0.3
+                }
+            },
+            {
+                "name": "LLRBP",
+                "params": {
+                    "method": "Momentum",
+                    "alpha": 1,
+                    "beta": 0.4
+                }
+            },
+            {
+                "name": "LLRBP",
+                "params": {
+                    "method": "Momentum",
+                    "alpha": 1,
+                    "beta": 0.5
                 }
             }
         ],
@@ -24,7 +59,7 @@
     
         "noise_model": "capacity", 
         "n_test": 10000,
-        "p_range": ["log", [0.001, 0.01, 10], [0.01, 0.1, 10], [0.1, 0.2, 5]]
+        "p_range": ["log", [0.001, 0.01, 10], [0.01, 0.1, 10]]
     },
 
 
