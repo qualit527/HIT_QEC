@@ -2,56 +2,23 @@
     "Surface": {
         "code": {
             "name": "Surface",
-            "L_range": [7]
+            "L_range": [3, 7, 11]
         },
             
         "decoders": [
             {
-                "name": "LLRBP",
+                "name": "EWA-BP",
                 "params": {
-                    "method": "Momentum",
-                    "alpha": 1,
-                    "beta": 0
+                    "alpha": 0.5
                 }
             },
             {
-                "name": "LLRBP",
-                "params": {
-                    "method": "Momentum",
-                    "alpha": 1,
-                    "beta": 0.1
-                }
+                "name": "AEWA-BP"
             },
             {
-                "name": "LLRBP",
+                "name": "AMBP",
                 "params": {
-                    "method": "Momentum",
-                    "alpha": 1,
-                    "beta": 0.2
-                }
-            },
-            {
-                "name": "LLRBP",
-                "params": {
-                    "method": "Momentum",
-                    "alpha": 1,
-                    "beta": 0.3
-                }
-            },
-            {
-                "name": "LLRBP",
-                "params": {
-                    "method": "Momentum",
-                    "alpha": 1,
-                    "beta": 0.4
-                }
-            },
-            {
-                "name": "LLRBP",
-                "params": {
-                    "method": "Momentum",
-                    "alpha": 1,
-                    "beta": 0.5
+                    "schedule": "layer"
                 }
             }
         ],
@@ -59,7 +26,50 @@
     
         "noise_model": "capacity", 
         "n_test": 10000,
-        "p_range": ["log", [0.001, 0.01, 10], [0.01, 0.1, 10]]
+        "p_range": ["log", [0.01, 0.1, 10], [0.1, 0.2, 5]]
+    },
+
+    "Surface-Ada": {
+        "code": {
+            "name": "Surface",
+            "L_range": [7]
+        },
+            
+        "decoders": [
+            {
+                "name": "LLRBP",
+                "params": {
+                    "method": "Ada",
+                    "alpha": 5
+                }
+            },
+            {
+                "name": "LLRBP",
+                "params": {
+                    "method": "Ada",
+                    "alpha": 10
+                }
+            },
+            {
+                "name": "LLRBP",
+                "params": {
+                    "method": "Ada",
+                    "alpha": 15
+                }
+            },
+            {
+                "name": "LLRBP",
+                "params": {
+                    "method": "Ada",
+                    "alpha": 20
+                }
+            }
+        ],
+        "max_iter": 100,
+    
+        "noise_model": "capacity", 
+        "n_test": 10000,
+        "p_range": ["log", [0.01, 0.1, 10]]
     },
 
 
@@ -83,59 +93,6 @@
         "noise_model": "phenomenological", 
         "n_test": 1000,
         "p_range": ["linear", [0.001, 0.025, 9]]
-    },
-
-
-    "RSurface": {
-        "code": {
-            "name": "RotatedSurface",
-            "L_range": [3, 5, 7]
-        },
-
-        "decoders": [
-            {
-                "name": "AEWA-BP",
-                "params": {
-                    "alphas": [1, 0.5, 6]
-                }
-            },
-            {
-                "name": "AEWA-BP",
-                "params": {
-                    "alphas": [1, 0.1, 10]
-                }
-            }
-        ],
-        "max_iter": 100,
-    
-        "noise_model": "capacity", 
-        "p_range": ["linear", [0.01, 0.15, 8]]
-    },
-
-    
-    "RToric": {
-        "code": {
-            "name": "RotatedToric",
-            "L_range": [4, 6, 8]
-        },
-
-        "decoders": [
-            {
-                "name": "EWA-BP",
-                "params": {
-                    "alpha": 0.7
-                }
-            },
-            {
-                "name": "AEWA-BP",
-                "params": {
-                }
-            }
-        ],
-        "max_iter": 100,
-    
-        "noise_model": "capacity", 
-        "p_range": ["linear", [0.01, 0.15, 8]]
     },
 
 

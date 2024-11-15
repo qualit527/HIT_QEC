@@ -47,9 +47,9 @@ def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, Hs=None,
             else:
                 raise ValueError(f"Invalid noise model for {name}: {noise_model}")
 
-        elif name in ["BP2", "BP-OSD"]:
+        elif name in ["BP2", "BP-OSD", "BPOSD"]:
             isOSD = params.get("OSD", False)
-            if name == "BP--OSD":
+            if name in ["BP-OSD", "BPOSD"]:
                 isOSD = True
             
             channel_error_rate4 = [pz + py for i in range(code_length)]
@@ -260,6 +260,19 @@ def run_decoder(name, decoder, syndrome, code_length, params, noise_model):
         if noise_model == "capacity":
             return [correction_x, correction_z], time_cost, iter, flag
 
+        else:
+            raise ValueError(f"Invalid noise model for {name}: {noise_model}")
+        
+    # BP in GF(2)
+    elif name in ["BP2", "BP-OSD", "BPOSD"]:
+        correction = decoder.decode(syndrome)
+        correction_z = correction[0:code_length]
+        correction_x = correction[code_length:2 * code_length]
+
+        time_cost = time.time() - start_time
+
+        if noise_model == "capacity":
+            return [correction_x, correction_z], time_cost, 0, True
         else:
             raise ValueError(f"Invalid noise model for {name}: {noise_model}")
     

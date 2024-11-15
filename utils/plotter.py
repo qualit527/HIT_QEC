@@ -48,7 +48,7 @@ def save_results(config, dim, results, path):
             data = []
             
             # 构建表格的标题行，第一列为 'Decoder'，后续列为物理错误率
-            header = ['p'] + [f"{p:.3f}" for p in p_range]
+            header = ['p'] + [f"{p:.4f}" for p in p_range]
             data.append(header)
 
             for i, decoder_info in enumerate(decoder_config):
