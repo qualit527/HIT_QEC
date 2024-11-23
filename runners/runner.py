@@ -119,12 +119,16 @@ class QecExpRunner:
             code_length = Hx.shape[1]
             assert code_length == Hz.shape[1], f"Error: Hx shape {Hx.shape[1]} does not match Hz shape {Hz.shape[1]}."
 
+            max_iter = self.max_iter
+            if max_iter == "N":
+                max_iter = code_length
+
             for p in self.p_range:       
                 px = p * self.rx
                 py = p * self.ry
                 pz = p * self.rz
 
-                decoders = build_decoder("capacity", self.decoder_config, Hx, Hz, dim, px, py, pz, max_iter=self.max_iter)
+                decoders = build_decoder("capacity", self.decoder_config, Hx, Hz, dim, px, py, pz, max_iter=max_iter)
                 
                 metrics = self._initialize_metrics(len(self.decoder_config), dim)
 

@@ -46,20 +46,25 @@ def load_config(config_file, config_name):
 
     final_p_range = []
 
-    for range_triplet in ranges:
-        if len(range_triplet) != 3:
-            raise ValueError("Each range_triplet must contain exactly three elements: start, stop, and num")
-        start, stop, num = range_triplet
-        if method == 'linear':
-            final_p_range.extend(np.linspace(start, stop, int(num)))
-        elif method == 'log':
-            if final_p_range == []:
-                part_range = np.logspace(np.log10(start), np.log10(stop), int(num))
+    if method == 'list':
+        for value in ranges[0]:
+            final_p_range.append(float(value))
+
+    else:
+        for range_triplet in ranges:
+            if len(range_triplet) != 3:
+                raise ValueError("Each range_triplet must contain exactly three elements: start, stop, and num")
+            start, stop, num = range_triplet
+            if method == 'linear':
+                final_p_range.extend(np.linspace(start, stop, int(num)))
+            elif method == 'log':
+                if final_p_range == []:
+                    part_range = np.logspace(np.log10(start), np.log10(stop), int(num))
+                else:
+                    part_range = np.logspace(np.log10(start), np.log10(stop), int(num))[1:]
+                final_p_range.extend(part_range)
             else:
-                part_range = np.logspace(np.log10(start), np.log10(stop), int(num))[1:]
-            final_p_range.extend(part_range)
-        else:
-            raise ValueError("Invalid method for p_range. Supported methods are 'linear' and 'log'")
+                raise ValueError("Invalid method for p_range. Supported methods are 'list', 'linear' and 'log'")
 
     config['p_range'] = np.array(final_p_range)
     return config

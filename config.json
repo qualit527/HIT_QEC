@@ -2,74 +2,89 @@
     "Surface": {
         "code": {
             "name": "Surface",
-            "L_range": [3, 7, 11]
+            "L_range": [5, 9, 13, 17, 21, 25, 29]
         },
             
         "decoders": [
             {
-                "name": "EWA-BP",
-                "params": {
-                    "alpha": 0.5
-                }
+                "name": "BP2"
             },
             {
-                "name": "AEWA-BP"
+                "name": "PDBP"
             },
             {
-                "name": "AMBP",
-                "params": {
-                    "schedule": "layer"
-                }
+                "name": "FDBP"
             }
         ],
-        "max_iter": 100,
+        "max_iter": "N",
     
         "noise_model": "capacity", 
         "n_test": 10000,
-        "p_range": ["log", [0.01, 0.1, 10], [0.1, 0.2, 5]]
+        "p_range": ["linear", [0.01, 0.2, 20]]
     },
 
-    "Surface-Ada": {
+
+    "Surface2": {
         "code": {
             "name": "Surface",
-            "L_range": [7]
+            "L_range": [5, 9, 13, 17, 21]
         },
             
         "decoders": [
             {
-                "name": "LLRBP",
-                "params": {
-                    "method": "Ada",
-                    "alpha": 5
-                }
+                "name": "FDBP"
             },
             {
-                "name": "LLRBP",
-                "params": {
-                    "method": "Ada",
-                    "alpha": 10
-                }
+                "name": "FDBP"
             },
             {
-                "name": "LLRBP",
-                "params": {
-                    "method": "Ada",
-                    "alpha": 15
-                }
+                "name": "FDBP"
             },
             {
-                "name": "LLRBP",
-                "params": {
-                    "method": "Ada",
-                    "alpha": 20
-                }
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
+            },
+            {
+                "name": "FDBP"
             }
         ],
-        "max_iter": 100,
+        "max_iter": [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
     
         "noise_model": "capacity", 
         "n_test": 10000,
-        "p_range": ["log", [0.01, 0.1, 10]]
+        "p_range": ["list", [0.01, 0.05, 0.1, 0.15, 0.2]]
     },
 
 

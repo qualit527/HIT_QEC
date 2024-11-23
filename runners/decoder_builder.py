@@ -26,7 +26,7 @@ def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, Hs=None,
     decoders = []
 
     # 遍历 decoder_config 列表，实例化每个译码器
-    for decoder_info in decoder_config:
+    for decoder_num, decoder_info in enumerate(decoder_config):
         name = decoder_info.get("name")
         params = decoder_info.get("params", {})
         code_length = Hx.shape[1]
@@ -63,7 +63,7 @@ def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, Hs=None,
             else:
                 decoders.append(ldpc.bp_decoder(H, channel_probs=channel_probs, max_iter=max_iter, bp_method='ps'))
 
-        elif name in ["FDBP", "FDBP-OSD"]:
+        elif name in ["PDBP", "PDBP-OSD", "FDBP", "FDBP-OSD"]:
             Hy = (Hx + Hz) % 2
 
             channel_error_rate1 = [pz for i in range(code_length)]
@@ -83,7 +83,14 @@ def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, Hs=None,
             else:
                 raise ValueError(f"Invalid noise model for {name}: {noise_model}")
 
-            decoders.append(FDBPDecoder(FDBPDecoder.Method.PRODUCT_SUM, max_iter, Mod2SparseMatrix(H_bar), channel_error_rate))
+            if name == "PDBP":
+                decoders.append(ldpc.bp_decoder(H_bar, channel_probs=channel_error_rate, max_iter=max_iter, bp_method='ps'))
+            elif params.get("OSD") is not None or name == "PDBP-OSD":
+                decoders.append(ldpc.bposd_decoder(H_bar, channel_probs=channel_error_rate, max_iter=max_iter, bp_method='ps', osd_method="osd_cs", osd_order=0))
+            elif isinstance(max_iter, list):
+                decoders.append(FDBPDecoder(FDBPDecoder.Method.PRODUCT_SUM, max_iter[decoder_num], Mod2SparseMatrix(H_bar), channel_error_rate))
+            else:
+                decoders.append(FDBPDecoder(FDBPDecoder.Method.PRODUCT_SUM, max_iter, Mod2SparseMatrix(H_bar), channel_error_rate))
                 
         elif name in ["Matching", "MWPM"]:
             weights_x = np.full(Hx.shape[1], np.log((1 - (px + py)) / (px + py)))
@@ -245,8 +252,13 @@ def run_decoder(name, decoder, syndrome, code_length, params, noise_model):
             
 
     # FDBP类型的译码器
-    elif name in ["FDBP", "FDBP-OSD"]:
-        if params.get("OSD") is not None or name == "FDBP-OSD":
+    elif name in ["PDBP", "PDBP-OSD", "FDBP", "FDBP-OSD"]:
+        if name in ["PDBP", "PDBP-OSD"]:
+            correction = decoder.decode(syndrome)
+            iter = 0
+            flag = decoder.converge
+
+        elif params.get("OSD") is not None or name == "FDBP-OSD":
             correction, iter, flag = decoder.bpOsdDecode(syndrome)
         else:
             correction, iter, flag = decoder.bpDecode(syndrome)
@@ -272,7 +284,7 @@ def run_decoder(name, decoder, syndrome, code_length, params, noise_model):
         time_cost = time.time() - start_time
 
         if noise_model == "capacity":
-            return [correction_x, correction_z], time_cost, 0, True
+            return [correction_x, correction_z], time_cost, 0, decoder.converge
         else:
             raise ValueError(f"Invalid noise model for {name}: {noise_model}")
     
