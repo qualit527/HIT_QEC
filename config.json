@@ -1,33 +1,167 @@
 {
     "Surface": {
         "code": {
-            "name": "Surface",
-            "L_range": [5, 9, 13, 17, 21, 25, 29]
+            "name": "RotatedSurface",
+            "L_range": [3, 5, 7],
+            "m_range": [3]
         },
             
         "decoders": [
             {
-                "name": "BP2"
+                "name": "EWA-BP",
+                "params": {
+                    "alpha": 0.5,
+                    "schedule": "layer"
+                }
             },
             {
-                "name": "PDBP"
-            },
-            {
-                "name": "FDBP"
+                "name": "LLRBP",
+                "params": {
+                    "OSD": "binary"
+                }
             }
         ],
-        "max_iter": "N",
+        "max_iter": 100,
     
+        "noise_model": "phenomenological", 
+        "n_test": 1000,
+        "p_range": ["linear", [0.001, 0.025, 7]]
+    },
+
+    "Surface-bias": {
+        "code": {
+            "name": "Surface",
+            "L_range": [5]
+        },
+            
+        "decoders": [
+            {
+                "name": "EWA-BP",
+                "params": {
+                    "alpha": 0.5
+                },
+                "bias": {
+                    "rx": 0.1,
+                    "ry": 0.1,
+                    "rz": 0.1
+                }
+            },
+            {
+                "name": "EWA-BP",
+                "params": {
+                    "alpha": 0.5
+                },
+                "bias": {
+                    "rx": 0.3333,
+                    "ry": 0.3333,
+                    "rz": 0.3333
+                }
+            },
+            {
+                "name": "EWA-BP",
+                "params": {
+                    "alpha": 0.5
+                },
+                "bias": {
+                    "rx": 0.5,
+                    "ry": 0.25,
+                    "rz": 0.25
+                }
+            },
+            {
+                "name": "EWA-BP",
+                "params": {
+                    "alpha": 0.5
+                }
+            },
+            {
+                "name": "EWA-BP",
+                "params": {
+                    "alpha": 0.5
+                },
+                "bias": {
+                    "rx": 0.95,
+                    "ry": 0.025,
+                    "rz": 0.025
+                }
+            }
+        ],
+        "max_iter": 100,
+    
+        "rx": 0.8,
+        "ry": 0.1,
+        "rz": 0.1,
         "noise_model": "capacity", 
         "n_test": 10000,
-        "p_range": ["linear", [0.01, 0.2, 20]]
+        "p_range": ["linear", [0.01, 0.1, 10]]
     },
 
 
-    "Surface2": {
+    "Surface-bias2": {
+        "code": {
+            "name": "HGP",
+            "L_range": [8]
+        },
+            
+        "decoders": [
+            {
+                "name": "EWA-BP",
+                "params": {
+                    "alpha": 0.5
+                },
+                "bias": {
+                    "rx": 0.3333,
+                    "ry": 0.3333,
+                    "rz": 0.3333,
+                    "rp": 0.01
+                }
+            },
+            {
+                "name": "EWA-BP",
+                "params": {
+                    "alpha": 0.5
+                },
+                "bias": {
+                    "rx": 0.3333,
+                    "ry": 0.3333,
+                    "rz": 0.3333,
+                    "rp": 0.5
+                }
+            },
+            {
+                "name": "EWA-BP",
+                "params": {
+                    "alpha": 0.5
+                }
+            },
+            {
+                "name": "EWA-BP",
+                "params": {
+                    "alpha": 0.5
+                },
+                "bias": {
+                    "rx": 0.3333,
+                    "ry": 0.3333,
+                    "rz": 0.3333,
+                    "rp": 1.5
+                }
+            }
+        ],
+        "max_iter": 100,
+    
+        "rx": 0.3333,
+        "ry": 0.3333,
+        "rz": 0.3333,
+        "noise_model": "capacity", 
+        "n_test": 1000,
+        "p_range": ["linear", [0.01, 0.1, 10]]
+    },
+
+
+    "Surface-iter": {
         "code": {
             "name": "Surface",
-            "L_range": [5, 9, 13, 17, 21]
+            "L_range": [21]
         },
             
         "decoders": [
@@ -84,9 +218,33 @@
     
         "noise_model": "capacity", 
         "n_test": 10000,
-        "p_range": ["list", [0.01, 0.05, 0.1, 0.15, 0.2]]
+        "p_range": ["linear", [0.01, 0.06, 5]]
     },
 
+    "XZZX3": {
+        "code": {
+            "name": "XZZX",
+            "L_range": [5, 9, 13, 17, 21]
+        },
+            
+        "decoders": [
+            {
+                "name": "BP-OSD"
+            },
+            {
+                "name": "PDBP-OSD"
+            },
+            {
+                "name": "FDBP-OSD"
+            }
+        ],
+        "max_iter": 100,
+    
+        "noise_model": "capacity", 
+        "n_test": 10000,
+        "p_range": ["linear", [0.13, 0.17, 21]]
+    },
+    
 
     "Toric": {
         "code": {

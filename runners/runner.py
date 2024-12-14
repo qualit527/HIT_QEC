@@ -20,6 +20,7 @@ class QecExpRunner:
         self.rs = config.get('rs')
         self.p_range = config.get('p_range')
         self.noise_model = config.get('noise_model')
+        self.readout = config.get('readout')
 
         self.block_error_rate = defaultdict(lambda: defaultdict(dict))
         self.slq_error_rate = defaultdict(lambda: defaultdict(dict))
@@ -128,7 +129,7 @@ class QecExpRunner:
                 py = p * self.ry
                 pz = p * self.rz
 
-                decoders = build_decoder("capacity", self.decoder_config, Hx, Hz, dim, px, py, pz, max_iter=max_iter)
+                decoders = build_decoder("capacity", self.decoder_config, Hx, Hz, dim, px, py, pz, p, max_iter=max_iter)
                 
                 metrics = self._initialize_metrics(len(self.decoder_config), dim)
 
@@ -191,11 +192,15 @@ class QecExpRunner:
             iter_range = m_range
         else:
             iter_range = L_range
+        
+        if len(m_range) == 1:
+            m_range = [m_range[0]] * len(L_range)
 
         for idx, iter_var in enumerate(iter_range):
             L = L_range[idx]
             m_times = m_range[idx]
-            print(f"\nSimulating L={L}, measure_times={m_times}...")
+            print(f"\nSimulating L={L}, rep_times={m_times}...")
+            m_times += 1 if self.readout else 0
             Hx, Hz, Lx, Lz, dim, isCSS = build_code(self.code_config.get("name"), L)
             if isCSS:
                 Hx0 = np.zeros(Hx.shape).astype(np.uint8)
@@ -206,38 +211,48 @@ class QecExpRunner:
             code_length = Hx.shape[1]
             assert code_length == Hz.shape[1], f"Error: Hx shape {Hx.shape[1]} does not match Hz shape {Hz.shape[1]}."
 
+            # Construct H with m_times H_bar as diagonal elements
+            Hx_concat = Hx.copy()
+            for i in range(m_times-1):
+                Hx_concat = block_diag([Hx_concat, Hx]).toarray()
+
+            Hz_concat = Hz.copy()
+            for i in range(m_times-1):
+                Hz_concat = block_diag([Hz_concat, Hz]).toarray()
+
+            # Construct Hs
+            m = Hx.shape[0]
+            Im = csr_matrix(np.eye(m, dtype=np.uint8))
+            rows = []
+
+            s_block_times = m_times - 2 if self.readout else m_times - 1
+
+            first_row = [Im] + [csr_matrix((m, m), dtype=np.uint8)] * s_block_times
+            rows.append(hstack(first_row))
+
+            for i in range(s_block_times):
+                row_blocks = [csr_matrix((m, m), dtype=np.uint8)] * i + [Im, Im] + [csr_matrix((m, m), dtype=np.uint8)] * (s_block_times - i - 1)
+                rows.append(hstack(row_blocks))
+            
+            if self.readout:
+                last_row = [csr_matrix((m, m), dtype=np.uint8)] * s_block_times + [Im]
+                rows.append(hstack(last_row))
+            
+            Hs = vstack(rows).toarray()
+
+            assert Hx_concat.shape[0] == Hz_concat.shape[0] == Hs.shape[0], "Hx_concat, Hz_concat, and Hs must have the same number of rows"
+
+            print(f"Hx shape: {Hx_concat.shape}")
+            print(f"Hz shape: {Hz_concat.shape}")
+            print(f"Hs shape: {Hs.shape}")
+
             for p in self.p_range:       
                 px = p * self.rx
                 py = p * self.ry
                 pz = p * self.rz
                 ps = p * self.rs
 
-                # Construct H with m_times H_bar as diagonal elements
-                Hx_concat = Hx.copy()
-                for i in range(m_times-1):
-                    Hx_concat = block_diag([Hx_concat, Hx]).toarray()
-
-                Hz_concat = Hz.copy()
-                for i in range(m_times-1):
-                    Hz_concat = block_diag([Hz_concat, Hz]).toarray()
-
-                # Construct Hs
-                m = Hx.shape[0]
-                Im = csr_matrix(np.eye(m, dtype=np.uint8))
-                rows = []
-
-                first_row = [Im] + [csr_matrix((m, m), dtype=np.uint8)] * (m_times - 1)
-                rows.append(hstack(first_row))
-
-                for i in range(m_times - 1):
-                    row_blocks = [csr_matrix((m, m), dtype=np.uint8)] * i + [Im, Im] + [csr_matrix((m, m), dtype=np.uint8)] * (m_times - i - 2)
-                    rows.append(hstack(row_blocks))
-                
-                Hs = vstack(rows).toarray()
-
-                assert Hx_concat.shape[0] == Hz_concat.shape[0] == Hs.shape[0], "Hx_concat, Hz_concat, and Hs must have the same number of rows"
-
-                decoders = build_decoder("phenomenological", self.decoder_config, Hx_concat, Hz_concat, dim, px, py, pz, Hs, ps, self.max_iter)
+                decoders = build_decoder("phenomenological", self.decoder_config, Hx_concat, Hz_concat, dim, px, py, pz, p, Hs, ps, self.max_iter)
 
                 metrics = self._initialize_metrics(len(self.decoder_config), dim)
 
@@ -249,7 +264,7 @@ class QecExpRunner:
 
                     x_error_concat = np.zeros(code_length * m_times, dtype=np.uint8)
                     z_error_concat = np.zeros(code_length * m_times, dtype=np.uint8)
-                    syndrome_error_concat = np.zeros(Hx.shape[0] * m_times, dtype=np.uint8)
+                    syndrome_error_concat = np.zeros(Hs.shape[1], dtype=np.uint8)
                     syndrome_concat = np.zeros(Hx.shape[0] * m_times, dtype=np.uint8)
 
                     # 重复测量，累积错误、拼接差错症状
@@ -266,10 +281,11 @@ class QecExpRunner:
 
                         syndrome_noiseless = (Hx @ z_error_total.T % 2 + Hz @ x_error_total.T % 2) % 2
 
-                        if t == m_times - 1:
+                        if t == m_times - 1 and self.readout:
                             syndrome_error = np.zeros(Hx.shape[0], dtype=np.uint8)
                         else:
                             syndrome_error = (np.random.rand(Hx.shape[0]) < ps).astype(np.uint8)
+                            syndrome_error_concat[t * Hx.shape[0]: (t + 1) * Hx.shape[0]] = syndrome_error
 
                         syndrome_noisy = ((syndrome_noiseless + syndrome_error) % 2).astype(np.uint8)
 
@@ -279,7 +295,6 @@ class QecExpRunner:
 
                         x_error_concat[t * code_length: (t + 1) * code_length] = x_error
                         z_error_concat[t * code_length: (t + 1) * code_length] = z_error
-                        syndrome_error_concat[t * Hx.shape[0]: (t + 1) * Hx.shape[0]] = syndrome_error
 
                     for i, decoder_info in enumerate(self.decoder_config):
                         name = decoder_info.get("name")

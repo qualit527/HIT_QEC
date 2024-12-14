@@ -5,7 +5,7 @@ import numpy as np
 import time
 import ldpc
 
-def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, Hs=None, ps=0, max_iter=100):
+def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, p, Hs=None, ps=0, max_iter=100):
     """
     实例化对应译码器
 
@@ -29,7 +29,16 @@ def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, Hs=None,
     for decoder_num, decoder_info in enumerate(decoder_config):
         name = decoder_info.get("name")
         params = decoder_info.get("params", {})
+        bias = decoder_info.get("bias", {})
         code_length = Hx.shape[1]
+
+        if bias:
+            p = bias.get("rp", 1) * p
+            if bias.get("p") is not None:
+                p = bias.get("p")
+            px = p * bias.get("rx")
+            py = p * bias.get("ry")
+            pz = p * bias.get("rz")
         
         if name == "LLRBP_py":
             if noise_model == "capacity":
@@ -82,7 +91,7 @@ def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, Hs=None,
             
             else:
                 raise ValueError(f"Invalid noise model for {name}: {noise_model}")
-
+            
             if name == "PDBP":
                 decoders.append(ldpc.bp_decoder(H_bar, channel_probs=channel_error_rate, max_iter=max_iter, bp_method='ps'))
             elif params.get("OSD") is not None or name == "PDBP-OSD":

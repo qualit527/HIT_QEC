@@ -241,48 +241,30 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
 
                 // 处理 init 方法
                 if(init == InitType::MOMENTUM){
-                    if(test == 1){
-                        if(iter > 0){
-                            qX(j) = alpha * qX(j) + (1.0 - alpha) * last_qX(j);
-                            qY(j) = alpha * qY(j) + (1.0 - alpha) * last_qY(j);
-                            qZ(j) = alpha * qZ(j) + (1.0 - alpha) * last_qZ(j);
-                        }
-                    }
+                    if(j < n){
+                        qX(j) = alpha * qX(j) + (1.0 - alpha) * last_qX(j);
+                        qY(j) = alpha * qY(j) + (1.0 - alpha) * last_qY(j);
+                        qZ(j) = alpha * qZ(j) + (1.0 - alpha) * last_qZ(j);
 
-                    else{
-                        if(j < n){
-                            qX(j) = alpha * qX(j) + (1.0 - alpha) * last_qX(j);
-                            qY(j) = alpha * qY(j) + (1.0 - alpha) * last_qY(j);
-                            qZ(j) = alpha * qZ(j) + (1.0 - alpha) * last_qZ(j);
-
-                            if(j == 0){
-                                last_qX(n-1) = qX(n-1);
-                                last_qY(n-1) = qY(n-1);
-                                last_qZ(n-1) = qZ(n-1);
-                            }
-                            else{
-                                last_qX(j-1) = qX(j-1);
-                                last_qY(j-1) = qY(j-1);
-                                last_qZ(j-1) = qZ(j-1);
-                            }
+                        if(j == 0){
+                            last_qX(n-1) = qX(n-1);
+                            last_qY(n-1) = qY(n-1);
+                            last_qZ(n-1) = qZ(n-1);
                         }
                         else{
-                            // 更新动量项 for qS
-                            gt_S(j - n) = last_qS(j - n) - qS(j - n);
-                            qS(j - n) = last_qS(j - n) - alpha * gt_S(j - n);
-
-                            if(j == n){
-                                last_qS(s-1) = qS(s-1);
-                            }
-                            else{
-                                last_qS(j-1) = qS(j-1);
-                            }
+                            last_qX(j-1) = qX(j-1);
+                            last_qY(j-1) = qY(j-1);
+                            last_qZ(j-1) = qZ(j-1);
                         }
                     }
-                    // // 更新 last_qS
-                    // for(int k = 0; k < s; ++k){
-                    //     last_qS(k) = qS(k);
-                    // }
+                    else{
+                        // 更新动量项 for qS
+                        qS(j - n) = alpha * qS(j - n) + (1.0 - alpha) * last_qS(j - n);
+                    }
+                    // 更新 last_qS
+                    for(int k = 0; k < s; ++k){
+                        last_qS(k) = qS(k);
+                    }
                 }
 
                 else if(init != InitType::NONE){

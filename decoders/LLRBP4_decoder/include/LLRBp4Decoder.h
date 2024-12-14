@@ -35,7 +35,7 @@ public:
                  double ps = 1,
                  int dimension = 1);
 
-    // ½âÂëº¯Êý
+    // ÒëÂëº¯Êý
     std::tuple<std::vector<int>, bool, int> standard_decoder(const Eigen::VectorXi& syndrome,
                                                              ScheduleType schedule = ScheduleType::FLOODING,
                                                              InitType init = InitType::NONE,

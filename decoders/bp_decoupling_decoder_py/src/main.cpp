@@ -11,8 +11,6 @@ sparse_matrix::Mod2SparseMatrix Mod2SparseMatrixConstructFromNumpy(py::array_t<u
 {
     if (matrix.ndim() != 2)
         throw std::invalid_argument("Input should be 2D numpy array.");
-    if (matrix.shape()[1] % 3 != 0)
-        throw std::invalid_argument("Input's cols should be 3×n.");
 
     sparse_matrix::Mod2SparseMatrix result(matrix.shape()[0], matrix.shape()[1]);
 

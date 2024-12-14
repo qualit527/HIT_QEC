@@ -22,6 +22,9 @@ def load_config(config_file, config_name):
     model = config.get('noise_model', 'capacity')
     config['noise_model'] = model
 
+    readout = config.get('readout', 'True')
+    config['readout'] = readout
+
     if model == 'phenomenological':
         code = config.get('code', {})
         L_range = code.get('L_range', [3, 5, 7])
