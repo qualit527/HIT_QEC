@@ -1,2 +1,8 @@
+*.pyd
+*.pdb
+*.pyc
+__pycache__/
+build/
+dist/
 results/*
 test.py

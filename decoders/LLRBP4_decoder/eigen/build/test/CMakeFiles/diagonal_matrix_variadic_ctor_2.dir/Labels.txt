@@ -1,4 +1,0 @@
-# Target labels
- BuildOfficial
-# Source files and their labels
-D:/CPP/eigen-master/test/diagonal_matrix_variadic_ctor.cpp
