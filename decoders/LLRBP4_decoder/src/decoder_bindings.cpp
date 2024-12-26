@@ -31,8 +31,10 @@ PYBIND11_MODULE(LLRBP4_decoder, m) {
 
     // ¶¨Òå OSDType Ã¶¾Ù
     py::enum_<OSDType>(m, "OSDType")
-        .value("BINARY", OSDType::BINARY)
         .value("NONE", OSDType::NONE)
+        .value("ZERO", OSDType::ZERO)
+        .value("EXHAUSTIVE", OSDType::EXHAUSTIVE)
+        .value("COMBINATION_SWEEP", OSDType::COMBINATION_SWEEP)
         .export_values();
 
 
@@ -62,6 +64,7 @@ PYBIND11_MODULE(LLRBP4_decoder, m) {
              py::arg("init") = InitType::NONE,
              py::arg("method") = MethodType::NONE,
              py::arg("OSD") = OSDType::NONE,
+             py::arg("OSD_order") = 0,
              py::arg("alpha") = 1.0,
              py::arg("beta") = 0.0,
              py::arg("test") = 0);

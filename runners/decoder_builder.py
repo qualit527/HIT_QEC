@@ -5,7 +5,7 @@ import numpy as np
 import time
 import ldpc
 
-def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, p, Hs=None, ps=0, max_iter=100):
+def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, p, Hs=None, ps=0, max_iter_list=100):
     """
     实例化对应译码器
 
@@ -31,6 +31,11 @@ def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, p, Hs=No
         params = decoder_info.get("params", {})
         bias = decoder_info.get("bias", {})
         code_length = Hx.shape[1]
+
+        if isinstance(max_iter_list, list):
+            max_iter = max_iter_list[decoder_num]
+        else:
+            max_iter = max_iter_list
 
         if bias:
             p = bias.get("rp", 1) * p
@@ -96,8 +101,6 @@ def build_decoder(noise_model, decoder_config, Hx, Hz, dim, px, py, pz, p, Hs=No
                 decoders.append(ldpc.bp_decoder(H_bar, channel_probs=channel_error_rate, max_iter=max_iter, bp_method='ps'))
             elif params.get("OSD") is not None or name == "PDBP-OSD":
                 decoders.append(ldpc.bposd_decoder(H_bar, channel_probs=channel_error_rate, max_iter=max_iter, bp_method='ps', osd_method="osd_cs", osd_order=0))
-            elif isinstance(max_iter, list):
-                decoders.append(FDBPDecoder(FDBPDecoder.Method.PRODUCT_SUM, max_iter[decoder_num], Mod2SparseMatrix(H_bar), channel_error_rate))
             else:
                 decoders.append(FDBPDecoder(FDBPDecoder.Method.PRODUCT_SUM, max_iter, Mod2SparseMatrix(H_bar), channel_error_rate))
                 
@@ -140,8 +143,10 @@ method_map = {
 }
 
 OSD_map = {
-    "binary": OSDType.BINARY,
-    "None": OSDType.NONE
+    "None": OSDType.NONE,
+    "OSD-0": OSDType.ZERO,
+    "OSD-E": OSDType.EXHAUSTIVE,
+    "OSD-CS": OSDType.COMBINATION_SWEEP
 }
 
 def run_decoder(name, decoder, syndrome, code_length, params, noise_model):

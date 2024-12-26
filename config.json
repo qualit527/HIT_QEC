@@ -1,31 +1,30 @@
 {
     "Surface": {
         "code": {
-            "name": "RotatedSurface",
-            "L_range": [3, 5, 7],
-            "m_range": [3]
+            "name": "Surface",
+            "L_range": [9]
         },
             
         "decoders": [
             {
-                "name": "EWA-BP",
+                "name": "MBP",
                 "params": {
-                    "alpha": 0.5,
                     "schedule": "layer"
                 }
             },
             {
-                "name": "LLRBP",
+                "name": "MBP",
                 "params": {
-                    "OSD": "binary"
+                    "schedule": "layer",
+                    "test": 1
                 }
             }
         ],
         "max_iter": 100,
     
-        "noise_model": "phenomenological", 
-        "n_test": 1000,
-        "p_range": ["linear", [0.001, 0.025, 7]]
+        "noise_model": "capacity", 
+        "n_test": 5000,
+        "p_range": ["linear", [0.08, 0.16, 6]]
     },
 
     "Surface-bias": {

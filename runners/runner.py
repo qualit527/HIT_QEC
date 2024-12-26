@@ -129,7 +129,7 @@ class QecExpRunner:
                 py = p * self.ry
                 pz = p * self.rz
 
-                decoders = build_decoder("capacity", self.decoder_config, Hx, Hz, dim, px, py, pz, p, max_iter=max_iter)
+                decoders = build_decoder("capacity", self.decoder_config, Hx, Hz, dim, px, py, pz, p, max_iter_list=max_iter)
                 
                 metrics = self._initialize_metrics(len(self.decoder_config), dim)
 

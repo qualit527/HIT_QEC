@@ -138,7 +138,8 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                                                                         ScheduleType schedule,
                                                                         InitType init,
                                                                         MethodType method,
-                                                                        OSDType OSD,
+                                                                        OSDType OSD_type,
+                                                                        int OSD_order,
                                                                         double alpha,
                                                                         double beta,
                                                                         int test){
@@ -385,6 +386,9 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                 }
 
                 else if(method == MethodType::MBP){
+                    if(test == 1) {
+                        alpha = 1 - 0.9 * (static_cast<double>(iter) / max_iter);
+                    }
                     if(j < n){
                         qX(j) = qX(j) - sum_qX_summands + (sum_qX_summands / alpha);
                         qY(j) = qY(j) - sum_qY_summands + (sum_qY_summands / alpha);
@@ -461,25 +465,27 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                     }
                 }    
 
-                // // 更新可靠性或振荡
-                // if(j < n){
-                //     if((last_Error[j] == Error[j]) && (last_Error[j + n] == Error[j + n])){
-                //         reliability(j) += 1.0;
-                //     }
-                //     else{
-                //         oscillation(j) += 1.0;
-                //         reliability(j) = 1.0;
-                //     }
-                // }
-                // else{
-                //     if(last_Error[j + n] == Error[j + n]){
-                //         reliability(j) += 1.0;
-                //     }
-                //     else{
-                //         oscillation(j) += 1.0;
-                //         reliability(j) = 1.0;
-                //     }
-                // }
+                // 更新可靠性或振荡
+                if(j < n){
+                    if((last_Error[j] == Error[j]) && (last_Error[j + n] == Error[j + n])){
+                        reliability(j) += 1.0;
+                        oscillation(j) = 1.0;
+                    }
+                    else{
+                        oscillation(j) += 1.0;
+                        reliability(j) = 1.0;
+                    }
+                }
+                else{
+                    if(last_Error[j + n] == Error[j + n]){
+                        reliability(j) += 1.0;
+                        oscillation(j) = 1.0;
+                    }
+                    else{
+                        oscillation(j) += 1.0;
+                        reliability(j) = 1.0;
+                    }
+                }
             }
             last_Error = Error; // 复制当前错误到最后错误
         }
@@ -710,6 +716,11 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                 }
 
                 else if(method == MethodType::MBP){
+                    alpha = 1 - 0.6 * (static_cast<double>(iter) / max_iter);
+                    if(test == 1) {
+                        alpha = alpha / (1 + 0.25 * oscillation(j));
+                        // alpha = 1 - 0.5 * (static_cast<double>(iter) / max_iter);
+                    }
                     if(j < n){
                         qX(j) = qX(j) - sum_qX_summands + (sum_qX_summands / alpha);
                         qY(j) = qY(j) - sum_qY_summands + (sum_qY_summands / alpha);
@@ -779,14 +790,14 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                     }
                 }
 
-                // // 更新可靠性或振荡
-                // if((last_Error[j] == Error[j]) && (last_Error[j + n] == Error[j + n])){
-                //     reliability(j) += 1.0;
-                // }
-                // else{
-                //     oscillation(j) += 1.0;
-                //     reliability(j) = 1.0;
-                // }
+                // 更新可靠性或振荡
+                if((last_Error[j] == Error[j]) && (last_Error[j + n] == Error[j + n])){
+                    reliability(j) += 1.0;
+                }
+                else{
+                    oscillation(j) += 1.0;
+                    reliability(j) = 1.0;
+                }
             }
 
             // 处理 s 个稳定子的硬判决（仅适用于现象学译码）
@@ -795,18 +806,15 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
                     if(qS(j) <= 0){
                         Error[2 * n + j] = 1;
                     }
+                    if(last_Error[j + 2 * n] == Error[j + 2 * n]){
+                        reliability(j + n) += 1.0;
+                    }
+                    else{
+                        oscillation(j + n) += 1.0;
+                        reliability(j + n) = 1.0;
+                    }
                 }
             }
-
-            //         if(last_Error[j + 2 * n] == Error[j + 2 * n]){
-            //             reliability(j) += 1.0;
-            //         }
-            //         else{
-            //             oscillation(j) += 1.0;
-            //             reliability(j) = 1.0;
-            //         }                    
-            //     }
-            // }
 
             last_Error = Error; // 复制当前错误到最后错误
         }
@@ -849,7 +857,7 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
     bool decoding_success = false;
     int final_iter = max_iter;
 
-    if(OSD == OSDType::BINARY){
+    if(OSD_type != OSDType::NONE){
         // 计算 px, py, pz
         Eigen::VectorXd px_prob = (1.0 / (qX.array().exp() + 1.0)).matrix();
         Eigen::VectorXd py_prob = (1.0 / (qY.array().exp() + 1.0)).matrix();
@@ -873,13 +881,10 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
         }
 
         // 调用 binary_osd
-        Error = binary_osd(syndrome, binary_H, probability, k, s);
+        Error = binary_osd(syndrome, binary_H, probability, k, s, OSD_order, OSD_type);
 
         // 解码标志为失败
         decoding_success = false;
-    }
-    else if(OSD != OSDType::NONE){
-        throw std::invalid_argument("Invalid OSD method. Expected 'binary'.");
     }
 
     return std::make_tuple(Error, decoding_success, final_iter);
@@ -887,7 +892,7 @@ std::tuple<std::vector<int>, bool, int> LLRBp4Decoder::standard_decoder(const Ei
 
 
 // 辅助方法：计算 GF(2) 矩阵的秩
-int LLRBp4Decoder::gf2_rank(Eigen::MatrixXi mat){
+int gf2_rank(Eigen::MatrixXi mat){
     int rank = 0;
     int rows = static_cast<int>(mat.rows());
     int cols = static_cast<int>(mat.cols());
@@ -928,7 +933,7 @@ int LLRBp4Decoder::gf2_rank(Eigen::MatrixXi mat){
 }
 
 // 辅助方法：在 GF(2) 中求解线性方程组
-Eigen::VectorXi LLRBp4Decoder::gf2_solve(Eigen::MatrixXi mat, Eigen::VectorXi vec){
+Eigen::VectorXi gf2_solve(Eigen::MatrixXi mat, Eigen::VectorXi vec){
     int rows = static_cast<int>(mat.rows());
     int cols = static_cast<int>(mat.cols());
     Eigen::MatrixXi augmented(mat.rows(), mat.cols() + 1);
@@ -992,12 +997,20 @@ Eigen::VectorXi LLRBp4Decoder::gf2_solve(Eigen::MatrixXi mat, Eigen::VectorXi ve
     return solution;
 }
 
-// 合并后的 OSD 函数实现
-std::vector<int> LLRBp4Decoder::binary_osd( const Eigen::VectorXi& syndrome,
-                                            const Eigen::Matrix<uint8_t, Eigen::Dynamic, Eigen::Dynamic>& binary_H,
-                                            const Eigen::VectorXd& probability,
-                                            int k,
-                                            int s){
+
+struct OSD0Result {
+    std::vector<int> solution;      // 长度为 2n + s 的解向量
+    std::vector<int> chosen_cols;   // 被选中的列索引，用于构造子矩阵
+};
+
+// OSD-0
+OSD0Result osd_0(   const Eigen::VectorXi& syndrome,
+                    const Eigen::Matrix<uint8_t, Eigen::Dynamic, Eigen::Dynamic>& binary_H,
+                    const Eigen::VectorXd& probability,
+                    int k,
+                    int s){
+    OSD0Result result;
+
     int total_col = static_cast<int>(binary_H.cols());
     int n = static_cast<int>((binary_H.cols() - s) / 2);
     int rank = n - k;
@@ -1066,10 +1079,14 @@ std::vector<int> LLRBp4Decoder::binary_osd( const Eigen::VectorXi& syndrome,
         for(int i = 0; i < index.size(); ++i){
             binary_error[index[i]] = X(i);
         }
+
+        result.chosen_cols = index;
     }
     catch(const std::runtime_error& e){
         // 如果没有解，则返回全零错误
-        return std::vector<int>(total_col, 0);
+        result.solution = std::vector<int>(total_col, 0);
+        result.chosen_cols = std::vector<int>();
+        return result;
     }
 
     // 转换为最终的 Error 向量
@@ -1090,5 +1107,231 @@ std::vector<int> LLRBp4Decoder::binary_osd( const Eigen::VectorXi& syndrome,
         }
     }
 
-    return Error;
+    result.solution = Error;
+    return result;
 }
+
+
+std::vector<std::vector<int>> generate_candidate_subsets(
+    const std::vector<int>& available_cols,
+    OSDType osd_type
+){
+    std::vector<std::vector<int>> candidates;
+    int m = (int)available_cols.size();
+
+    if(osd_type == OSDType::EXHAUSTIVE){
+        int total = (1 << m);
+
+        candidates.reserve(total);
+        for(int mask = 0; mask < total; mask++){
+            std::vector<int> subset;
+            for(int i = 0; i < m; i++){
+                if((mask >> i) & 1){
+                    subset.push_back(available_cols[i]);
+                }
+            }
+            candidates.push_back(std::move(subset));
+        }
+    }
+    else if(osd_type == OSDType::COMBINATION_SWEEP){
+        // weight-1
+        for(int i = 0; i < m; i++){
+            candidates.push_back({ available_cols[i] });
+        }
+        // weight-2 组合
+        for(int i = 0; i < m; i++){
+            for(int j = i+1; j < m; j++){
+                candidates.push_back({ available_cols[i], available_cols[j] });
+            }
+        }
+    }
+    else {
+        throw std::invalid_argument("Invalid OSD method. Expected 'None', 'OSD-0', 'OSD-E', 'OSD-CS'.");
+    }
+
+    return candidates;
+}
+
+
+// 计算解向量的 weight
+double compute_weight(const std::vector<int>& solution, int s, const Eigen::VectorXd& probability, std::string method="hamming"){
+    int total_size = (int)solution.size();
+    double weight = 0;
+
+    // Hamming weight
+    if(method == "hamming"){
+        int n = (total_size - s) / 2;
+        for(int i = 0; i < n; i++){
+            if(solution[i] == 1 || solution[i + n] == 1){
+                weight += 1;
+            }
+        }
+
+        for(int i = 0; i < s; i++){
+            if(solution[2*n + i] == 1){
+                weight += 1;
+            }
+        }
+    }
+
+    else if(method == "naive"){
+        for(int i = 0; i < total_size; i++){
+            if(solution[i] == 1){
+                weight += 1;
+            }
+        }
+    }
+
+    return weight;
+}
+
+// ---------------------------
+// 高阶 OSD 主函数
+// ---------------------------
+std::vector<int> LLRBp4Decoder::binary_osd(
+    const Eigen::VectorXi& syndrome,
+    const Eigen::Matrix<uint8_t, Eigen::Dynamic, Eigen::Dynamic>& binary_H,
+    const Eigen::VectorXd& probability,
+    int k,
+    int s,
+    int osd_order,
+    OSDType osd_type
+){
+    // Step 1: 先做 OSD-0，得到一个基解
+    OSD0Result osd0_result = osd_0(syndrome, binary_H, probability, k, s);
+    std::vector<int> osd0_solution    = osd0_result.solution;     // 长度 = n
+    std::vector<int> osd0_chosen_cols = osd0_result.chosen_cols;  // 长度 = rank
+
+    if(osd_type == OSDType::ZERO){
+        return osd0_solution;
+    }
+
+    double osd0_cost = compute_weight(osd0_solution, s, probability);
+    double best_cost = osd0_cost;
+    std::vector<int> best_solution = osd0_solution;
+
+    // Step 2: 从 total_col 中排除 osd0_chosen_cols, 取前 osd_order 个
+    int total_col = static_cast<int>(binary_H.cols());
+    std::vector<int> all_cols(total_col);
+    for(int i = 0; i < total_col; ++i){
+        all_cols[i] = i;
+    }
+    std::sort(all_cols.begin(), all_cols.end(),
+              [&probability](int a, int b) -> bool {
+                  return probability(a) < probability(b);
+              });
+
+    std::unordered_set<int> chosen_set(osd0_chosen_cols.begin(), osd0_chosen_cols.end());
+    std::vector<int> available_cols;
+    available_cols.reserve(total_col - osd0_chosen_cols.size());
+    for(auto col : all_cols){
+        if(! chosen_set.count(col)) {
+            available_cols.push_back(col);
+        }
+    }
+    if((int)available_cols.size() > osd_order){
+        available_cols.resize(osd_order);
+    }
+
+    // Step 3: 生成替换列集
+    std::vector<std::vector<int>> candidate_subsets = generate_candidate_subsets(
+        available_cols,
+        osd_type
+    );
+
+    // std::cout << std::endl << "生成的所有子集的列号: " << std::endl;
+    // for(const auto& subset : candidate_subsets){
+    //     std::cout << "[";
+    //     for(auto col : subset){
+    //         std::cout << col << " ";
+    //     }
+    //     std::cout << "]" << std::endl;
+    // }
+
+    // Step4: 遍历所有替换列集
+    for(const auto& subset : candidate_subsets){
+        int r = (int)subset.size();
+        if(r == 0) {
+            // OSD-0
+            continue;
+        }
+        if(r > osd_order) {
+            // 只允许替换列数 ≤ osd_order
+            continue;
+        }
+
+        Eigen::VectorXi new_syndrome = syndrome;
+        for(int col: subset){
+            for (int row = 0; row < binary_H.rows(); ++row) {
+                if (binary_H(row, col) != 0) {
+                    new_syndrome(row) = (new_syndrome(row) + 1) % 2;
+                }
+            }
+        }
+
+        Eigen::MatrixXi Htmp = binary_H.cast<int>();
+        Eigen::MatrixXi Hprime(Htmp.rows(), (int)osd0_chosen_cols.size());
+        for(int c=0; c<(int)osd0_chosen_cols.size(); c++){
+            Hprime.col(c) = Htmp.col(osd0_chosen_cols[c]);
+        }
+
+        Eigen::VectorXi e_prime;
+        try{
+            e_prime = gf2_solve(Hprime, new_syndrome);
+        }
+        catch(...){
+            continue;
+        }
+
+        // 7) 将 e_prime 映射回 candidate_solution
+        std::vector<int> candidate_solution(total_col, 0);
+        for(int i=0; i<(int)osd0_chosen_cols.size(); i++){
+            candidate_solution[osd0_chosen_cols[i]] = e_prime(i);
+        }
+        for(int col: subset){
+            candidate_solution[col] = 1;
+        }
+
+        double c_weight = compute_weight(candidate_solution, s, probability);
+
+        if(c_weight < best_cost){
+            best_cost = c_weight;
+            best_solution = candidate_solution;
+        }
+    }
+
+    // if(best_solution != osd0_solution){
+    //     // // Verify if binary_H * best_solution = syndrome
+    //     // Eigen::VectorXi best_solution_eigen = Eigen::Map<Eigen::VectorXi>(best_solution.data(), best_solution.size());
+    //     // Eigen::VectorXi syndrome_computed = mod2(binary_H.cast<int>() * best_solution_eigen);
+    //     // if ((syndrome_computed.array() == syndrome.array()).all()) {
+    //     //     std::cout << "Verification successful." << std::endl;
+    //     // } else {
+    //     //     std::cout << "Verification failed." << std::endl;
+    //     // }
+    //     std::string type;
+    //     if(osd_type == OSDType::EXHAUSTIVE)
+    //         type = "E";
+    //     else if(osd_type == OSDType::COMBINATION_SWEEP)
+    //         type = "CS";
+
+    //     std::cout << "OSD-0 solution: " << std::endl << "[ ";
+    //     for (int i = 0; i < osd0_solution.size(); ++i) {
+    //         if (osd0_solution[i] != 0) {
+    //             std::cout << i << " ";
+    //         }
+    //     }
+    //     std::cout << "], weight: " << osd0_cost << std::endl;
+    //     std::cout << "OSD-" << type << " solution: " << std::endl << "[ ";
+    //     for (int i = 0; i < best_solution.size(); ++i) {
+    //         if (best_solution[i] != 0) {
+    //             std::cout << i << " ";
+    //         }
+    //     }
+    //     std::cout << "], weight: " << best_cost << std::endl;
+    // }
+
+    // best_solution 仍是二进制形式: [X1, ..., Xn, Z1, ... , Zn, S1, ... , Sm]
+    return best_solution;
+}
+

@@ -20,7 +20,7 @@ enum class PauliType { X, Y, Z };
 enum class ScheduleType { FLOODING, LAYER, NONE };
 enum class InitType { MOMENTUM, NONE };
 enum class MethodType { MOMENTUM, ADA, MBP, NONE };
-enum class OSDType { BINARY, NONE };
+enum class OSDType { NONE, ZERO, EXHAUSTIVE, COMBINATION_SWEEP};
 
 class LLRBp4Decoder {
 public:
@@ -40,7 +40,8 @@ public:
                                                              ScheduleType schedule = ScheduleType::FLOODING,
                                                              InitType init = InitType::NONE,
                                                              MethodType method = MethodType::NONE,
-                                                             OSDType OSD = OSDType::NONE,
+                                                             OSDType OSD_type = OSDType::NONE,
+                                                             int OSD_order = 0,
                                                              double alpha = 1.0,
                                                              double beta = 0.0,
                                                              int test = 0);
@@ -81,16 +82,18 @@ private:
     inline double lambda_func(const PauliType W, double px_val, double py_val, double pz_val);
 
     // 辅助方法：计算 GF(2) 矩阵的秩
-    int gf2_rank(Eigen::MatrixXi mat);
+    // int gf2_rank(Eigen::MatrixXi mat);
 
     // 辅助方法：在 GF(2) 中求解线性方程组
-    Eigen::VectorXi gf2_solve(Eigen::MatrixXi mat, Eigen::VectorXi vec);
+    // Eigen::VectorXi gf2_solve(Eigen::MatrixXi mat, Eigen::VectorXi vec);
 
     std::vector<int> binary_osd(const Eigen::VectorXi& syndrome,
                                 const Eigen::Matrix<uint8_t, Eigen::Dynamic, Eigen::Dynamic>& binary_H,
                                 const Eigen::VectorXd& probability,
                                 int k,
-                                int s = 0); // 合并后的 binary_osd 函数
+                                int s = 0,
+                                int osd_order=0,
+                                OSDType osd_type=OSDType::NONE);
 };
 
 #endif // LLRBP4DECODER_H
